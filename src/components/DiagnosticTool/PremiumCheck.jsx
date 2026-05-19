@@ -63,9 +63,10 @@ const AUDIT_AGES = [
 
 /* ── Shared UI primitives ────────────────────────────────────────────── */
 
-function TileGrid({ options, value, onChange, cols = 4 }) {
+function TileGrid({ options, value, onChange, cols = 4, mobileCols }) {
+  const colCount = mobileCols ?? cols
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: '6px', marginTop: '6px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${colCount}, 1fr)`, gap: '8px', marginTop: '6px' }}>
       {options.map((opt) => {
         const active = value === opt.val
         return (
@@ -75,7 +76,7 @@ function TileGrid({ options, value, onChange, cols = 4 }) {
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.97 }}
             style={{
-              padding: '10px 8px',
+              padding: '12px 8px',
               border: `2px solid ${active ? 'var(--teal)' : 'var(--border)'}`,
               background: active ? 'var(--teal-pale)' : 'var(--white)',
               cursor: 'pointer',
@@ -83,40 +84,34 @@ function TileGrid({ options, value, onChange, cols = 4 }) {
               transition: 'border-color 0.15s, background 0.15s',
               userSelect: 'none',
               position: 'relative',
+              minHeight: '52px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             {active && (
               <motion.div
-                layoutId="tile-check"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.15 }}
                 style={{
-                  position: 'absolute',
-                  top: '4px',
-                  right: '4px',
-                  width: '14px',
-                  height: '14px',
-                  background: 'var(--teal)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '9px',
-                  color: 'var(--white)',
-                  fontWeight: 700,
+                  position: 'absolute', top: '4px', right: '4px',
+                  width: '14px', height: '14px', background: 'var(--teal)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: '9px', color: 'var(--white)', fontWeight: 700,
                 }}
               >
                 ✓
               </motion.div>
             )}
-            <div style={{
-              fontSize: '13px',
-              fontWeight: active ? 700 : 500,
-              color: active ? 'var(--navy)' : 'var(--text-dark)',
-              lineHeight: 1.2,
-            }}>
+            <div style={{ fontSize: '13px', fontWeight: active ? 700 : 500, color: active ? 'var(--navy)' : 'var(--text-dark)', lineHeight: 1.25 }}>
               {opt.icon && <span style={{ display: 'block', fontSize: '16px', marginBottom: '2px' }}>{opt.icon}</span>}
               {opt.label}
             </div>
             {opt.sub && (
-              <div style={{ fontSize: '10px', color: active ? 'var(--teal-dark)' : 'var(--text-muted)', marginTop: '2px' }}>
+              <div style={{ fontSize: '10px', color: active ? 'var(--teal-dark)' : 'var(--text-muted)', marginTop: '3px' }}>
                 {opt.sub}
               </div>
             )}
@@ -326,11 +321,11 @@ export default function PremiumCheck() {
                 </div>
                 <div style={{ marginBottom: '1rem' }}>
                   <FieldLabel>Company Size</FieldLabel>
-                  <TileGrid options={SIZES} value={form.size} onChange={(v) => set('size', v)} cols={4} />
+                  <TileGrid options={SIZES} value={form.size} onChange={(v) => set('size', v)} cols={2} />
                 </div>
                 <div style={{ marginBottom: '0.25rem' }}>
                   <FieldLabel>Annual Turnover (USD)</FieldLabel>
-                  <TileGrid options={TURNOVERS} value={form.turnover} onChange={(v) => set('turnover', v)} cols={5} />
+                  <TileGrid options={TURNOVERS} value={form.turnover} onChange={(v) => set('turnover', v)} cols={3} />
                 </div>
               </>
             )}
@@ -390,16 +385,16 @@ export default function PremiumCheck() {
                 </div>
                 <div style={{ marginBottom: '1rem' }}>
                   <FieldLabel>Active Policies</FieldLabel>
-                  <TileGrid options={POLICIES} value={form.policies} onChange={(v) => set('policies', v)} cols={4} />
+                  <TileGrid options={POLICIES} value={form.policies} onChange={(v) => set('policies', v)} cols={2} />
                 </div>
                 <div style={{ marginBottom: '0.25rem' }}>
                   <FieldLabel>Cover Types Currently Held</FieldLabel>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px', marginTop: '6px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', marginTop: '6px' }}>
                     {COVER_TYPES.map((c) => {
                       const active = form.covers.includes(c)
                       return (
-                        <motion.div key={c} onClick={() => toggleCover(c)} whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 10px', border: `2px solid ${active ? 'var(--teal)' : 'var(--border)'}`, background: active ? 'var(--teal-pale)' : 'var(--white)', cursor: 'pointer', fontSize: '12px', color: active ? 'var(--navy)' : 'var(--text-muted)', fontWeight: active ? 500 : 400, userSelect: 'none', transition: 'all 0.15s' }}>
-                          <span style={{ width: '16px', height: '16px', background: active ? 'var(--teal)' : 'transparent', border: `2px solid ${active ? 'var(--teal)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', color: 'var(--white)', flexShrink: 0, transition: 'all 0.15s' }}>{active ? '✓' : ''}</span>
+                        <motion.div key={c} onClick={() => toggleCover(c)} whileTap={{ scale: 0.97 }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '11px 10px', border: `2px solid ${active ? 'var(--teal)' : 'var(--border)'}`, background: active ? 'var(--teal-pale)' : 'var(--white)', cursor: 'pointer', fontSize: '12px', color: active ? 'var(--navy)' : 'var(--text-muted)', fontWeight: active ? 600 : 400, userSelect: 'none', transition: 'all 0.15s' }}>
+                          <span style={{ width: '16px', height: '16px', flexShrink: 0, background: active ? 'var(--teal)' : 'transparent', border: `2px solid ${active ? 'var(--teal)' : 'var(--border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', color: 'var(--white)', transition: 'all 0.15s' }}>{active ? '✓' : ''}</span>
                           {c}
                         </motion.div>
                       )
@@ -436,15 +431,15 @@ export default function PremiumCheck() {
               <>
                 <div style={{ marginBottom: '1rem' }}>
                   <FieldLabel>Claims Filed — Last 3 Years</FieldLabel>
-                  <TileGrid options={CLAIMS} value={form.claims} onChange={(v) => set('claims', v)} cols={4} />
+                  <TileGrid options={CLAIMS} value={form.claims} onChange={(v) => set('claims', v)} cols={2} />
                 </div>
                 <div style={{ marginBottom: '1rem' }}>
                   <FieldLabel>Premium Trend — Last 2 Renewals</FieldLabel>
-                  <TileGrid options={PREM_CHANGES} value={form.premChange} onChange={(v) => set('premChange', v)} cols={4} />
+                  <TileGrid options={PREM_CHANGES} value={form.premChange} onChange={(v) => set('premChange', v)} cols={2} />
                 </div>
                 <div style={{ marginBottom: '0.25rem' }}>
                   <FieldLabel>Last Full Policy Audit</FieldLabel>
-                  <TileGrid options={AUDIT_AGES} value={form.auditAge} onChange={(v) => set('auditAge', v)} cols={4} />
+                  <TileGrid options={AUDIT_AGES} value={form.auditAge} onChange={(v) => set('auditAge', v)} cols={2} />
                 </div>
               </>
             )}
@@ -486,39 +481,50 @@ export default function PremiumCheck() {
                   </div>
                 </div>
 
-                {/* Zone 2 — Savings | Insights (2 col) */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '0', marginBottom: '0' }}>
-                  {/* Savings */}
-                  <div style={{
-                    background: 'var(--navy)', color: 'var(--white)',
-                    padding: '1.25rem 1.5rem',
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                    borderRight: '1px solid rgba(255,255,255,0.08)',
-                  }}>
-                    <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '6px' }}>
-                      Est. Annual Savings via IOP
-                    </div>
-                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, color: 'var(--teal)', letterSpacing: '-0.02em', lineHeight: 1 }}>
+                {/* Zone 2 — Savings + Insights */}
+                <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', background: 'var(--light-bg)', borderBottom: '1px solid var(--border)' }}>
+                  {/* Savings panel */}
+                  <div style={{ background: 'var(--light-bg)', borderTop: '3px solid var(--teal)', padding: '1.25rem 1rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', borderRight: '1px solid var(--border)' }}>
+                    <div style={{ fontSize: '9px', color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '8px', lineHeight: 1.5 }}>Est. Annual<br/>Savings via IOP</div>
+                    <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 800, color: 'var(--teal)', letterSpacing: '-0.02em', lineHeight: 1 }}>
                       ${result.savings.toLocaleString()}
                     </div>
-                    <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '8px' }}>
-                      Subject to full audit
-                    </div>
+                    <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '8px' }}>Subject to full audit</div>
                   </div>
+
                   {/* Insights */}
-                  <div style={{ padding: '1rem 1.25rem', background: 'var(--white)' }}>
-                    <ul style={{ listStyle: 'none' }}>
-                      {result.insights.map((ins, i) => (
-                        <li key={i} style={{
-                          display: 'flex', gap: '8px', padding: '7px 0',
-                          borderBottom: i < result.insights.length - 1 ? '1px solid var(--border)' : 'none',
-                          fontSize: '12px', color: 'var(--text-muted)', lineHeight: 1.55, alignItems: 'flex-start',
-                        }}>
-                          <span style={{ flexShrink: 0, color: ins.icon === '✓' ? 'var(--teal)' : 'var(--warning)', fontWeight: 700, marginTop: '1px' }}>{ins.icon}</span>
-                          <span>{ins.text}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div style={{ padding: '0.875rem 1rem' }}>
+                    {result.insights.map((ins, i) => {
+                      const isPositive = ins.icon === '✓'
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: 8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.08, duration: 0.3 }}
+                          style={{
+                            display: 'flex', gap: '10px', alignItems: 'flex-start',
+                            padding: '8px 10px',
+                            marginBottom: i < result.insights.length - 1 ? '5px' : 0,
+                            background: isPositive ? 'rgba(0,184,153,0.07)' : 'rgba(245,158,11,0.07)',
+                            borderLeft: `3px solid ${isPositive ? 'var(--teal)' : '#F59E0B'}`,
+                          }}
+                        >
+                          <span style={{
+                            flexShrink: 0, width: '20px', height: '20px',
+                            background: isPositive ? 'var(--teal)' : '#F59E0B',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: '10px', color: 'var(--white)', fontWeight: 800,
+                            marginTop: '1px',
+                          }}>
+                            {isPositive ? '✓' : '!'}
+                          </span>
+                          <span style={{ fontSize: '13px', color: 'var(--text-dark)', lineHeight: 1.6, fontWeight: isPositive ? 400 : 500 }}>
+                            {ins.text}
+                          </span>
+                        </motion.div>
+                      )
+                    })}
                   </div>
                 </div>
 
@@ -536,35 +542,50 @@ export default function PremiumCheck() {
               <>
                 <ScoreResult score={result.score} description={result.desc} />
                 <div style={{
-                  background: 'var(--navy)', color: 'var(--white)',
+                  background: 'var(--light-bg)',
+                  borderTop: '3px solid var(--teal)',
+                  borderBottom: '1px solid var(--border)',
                   padding: '0.875rem 1rem',
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   marginBottom: '0.875rem',
                 }}>
                   <div>
-                    <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', marginBottom: '2px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                    <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '2px', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                       Est. Annual Savings via IOP
                     </div>
                     <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--teal)' }}>
                       ${result.savings.toLocaleString()}
                     </div>
                   </div>
-                  <div style={{ textAlign: 'right', fontSize: '10px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>
+                  <div style={{ textAlign: 'right', fontSize: '10px', color: 'var(--text-muted)', lineHeight: 1.5 }}>
                     Subject to<br />full audit
                   </div>
                 </div>
-                <ul style={{ listStyle: 'none', marginBottom: '0.875rem' }}>
-                  {result.insights.map((ins, i) => (
-                    <li key={i} style={{
-                      display: 'flex', gap: '8px', padding: '7px 0',
-                      borderBottom: '1px solid var(--border)',
-                      fontSize: '12px', color: 'var(--text-muted)', lineHeight: 1.5, alignItems: 'flex-start',
-                    }}>
-                      <span style={{ flexShrink: 0, color: ins.icon === '✓' ? 'var(--teal)' : 'var(--warning)', fontWeight: 700 }}>{ins.icon}</span>
-                      <span>{ins.text}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div style={{ marginBottom: '0.875rem', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {result.insights.map((ins, i) => {
+                    const isPositive = ins.icon === '✓'
+                    return (
+                      <div key={i} style={{
+                        display: 'flex', gap: '10px', alignItems: 'flex-start',
+                        padding: '10px 12px',
+                        background: isPositive ? 'rgba(0,184,153,0.07)' : 'rgba(245,158,11,0.07)',
+                        borderLeft: `3px solid ${isPositive ? 'var(--teal)' : '#F59E0B'}`,
+                      }}>
+                        <span style={{
+                          flexShrink: 0, width: '20px', height: '20px',
+                          background: isPositive ? 'var(--teal)' : '#F59E0B',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          fontSize: '10px', color: 'var(--white)', fontWeight: 800, marginTop: '1px',
+                        }}>
+                          {isPositive ? '✓' : '!'}
+                        </span>
+                        <span style={{ fontSize: '13px', color: 'var(--text-dark)', lineHeight: 1.6, fontWeight: isPositive ? 400 : 500 }}>
+                          {ins.text}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
                 <LeadGateForm
                   reportLabel="Premium Efficiency Report"
                   tool="Insurance Premium Check"
