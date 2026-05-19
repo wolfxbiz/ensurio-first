@@ -16,8 +16,9 @@ const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'   // e.g. 'AbCdEfGhIjKlMnOp'
 
 const styles = {
   gate: {
-    background: 'var(--navy)',
+    background: 'var(--light-bg)',
     border: 'none',
+    borderTop: '3px solid var(--teal)',
     borderRadius: 0,
     padding: '1.75rem',
     marginTop: '1.25rem',
@@ -26,13 +27,13 @@ const styles = {
     fontFamily: 'var(--font-heading)',
     fontSize: '1.1rem',
     fontWeight: 700,
-    color: 'var(--white)',
+    color: 'var(--navy)',
     marginBottom: '8px',
     lineHeight: 1.3,
   },
   desc: {
     fontSize: '13px',
-    color: 'rgba(255,255,255,0.55)',
+    color: 'var(--text-muted)',
     lineHeight: 1.65,
     marginBottom: '1.5rem',
   },
@@ -53,17 +54,17 @@ const styles = {
     fontWeight: 600,
     letterSpacing: '0.08em',
     textTransform: 'uppercase',
-    color: 'rgba(255,255,255,0.6)',
+    color: 'var(--text-mid)',
   },
   input: {
     padding: '12px 14px',
-    border: '2px solid rgba(255,255,255,0.15)',
+    border: '2px solid var(--border)',
     borderRadius: 0,
     fontSize: '14px',
     fontFamily: 'var(--font-body)',
-    color: 'var(--white)',
+    color: 'var(--text-dark)',
     outline: 'none',
-    background: 'rgba(255,255,255,0.08)',
+    background: 'var(--white)',
     width: '100%',
     transition: 'border-color 0.2s',
   },
@@ -81,7 +82,7 @@ const styles = {
   },
   privacy: {
     fontSize: '12px',
-    color: 'rgba(255,255,255,0.38)',
+    color: 'var(--text-muted)',
     display: 'flex',
     alignItems: 'center',
     gap: '5px',
@@ -133,26 +134,37 @@ export default function LeadGateForm({ reportLabel, onSubmit, tool, score, horiz
 
   return (
     <motion.div
-      style={styles.gate}
+      style={{ ...styles.gate, padding: '1.5rem 1.75rem' }}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <div style={styles.title}>Download Your Free {reportLabel}</div>
-      <div style={styles.desc}>
-        Enter your details to receive a personalized PDF report with your full analysis and recommendations.
+      {/* Header row */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '1.125rem', flexWrap: 'wrap' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+            <span style={{ width: '20px', height: '20px', background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', color: 'var(--white)', fontWeight: 800, flexShrink: 0 }}>↓</span>
+            <div style={{ ...styles.title, marginBottom: 0 }}>Get Your Free {reportLabel}</div>
+          </div>
+          <div style={{ ...styles.desc, marginBottom: 0, fontSize: '12px' }}>
+            Personalised PDF report with your full analysis, benchmarking, and recommended next steps.
+          </div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '11px', color: 'var(--text-muted)', whiteSpace: 'nowrap', flexShrink: 0, paddingTop: '2px' }}>
+          🔒 Strictly confidential
+        </div>
       </div>
 
       <form onSubmit={handleSubmit(submit)} noValidate>
         {horizontal ? (
-          /* Horizontal layout: all 3 fields + button in one row */
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '10px', alignItems: 'end' }}>
+          /* Horizontal layout */
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '8px', alignItems: 'end' }}>
             <div style={styles.field}>
               <label style={styles.label}>Full Name</label>
               <input style={{ ...styles.input, ...(errors.name ? { borderColor: 'var(--danger)' } : {}) }}
                 placeholder="Your name"
                 onFocus={(e) => (e.target.style.borderColor = 'var(--teal)')}
-                onBlur={(e) => (e.target.style.borderColor = errors.name ? 'var(--danger)' : 'rgba(255,255,255,0.15)')}
+                onBlur={(e) => (e.target.style.borderColor = errors.name ? 'var(--danger)' : 'var(--border)')}
                 {...register('name', { required: 'Required' })} />
               {errors.name && <span style={styles.error}>{errors.name.message}</span>}
             </div>
@@ -161,7 +173,7 @@ export default function LeadGateForm({ reportLabel, onSubmit, tool, score, horiz
               <input style={{ ...styles.input, ...(errors.email ? { borderColor: 'var(--danger)' } : {}) }}
                 placeholder="name@company.com" type="email"
                 onFocus={(e) => (e.target.style.borderColor = 'var(--teal)')}
-                onBlur={(e) => (e.target.style.borderColor = errors.email ? 'var(--danger)' : 'rgba(255,255,255,0.15)')}
+                onBlur={(e) => (e.target.style.borderColor = errors.email ? 'var(--danger)' : 'var(--border)')}
                 {...register('email', { required: 'Required', pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' } })} />
               {errors.email && <span style={styles.error}>{errors.email.message}</span>}
             </div>
@@ -170,14 +182,14 @@ export default function LeadGateForm({ reportLabel, onSubmit, tool, score, horiz
               <input style={{ ...styles.input, ...(errors.company ? { borderColor: 'var(--danger)' } : {}) }}
                 placeholder="Your company"
                 onFocus={(e) => (e.target.style.borderColor = 'var(--teal)')}
-                onBlur={(e) => (e.target.style.borderColor = errors.company ? 'var(--danger)' : 'rgba(255,255,255,0.15)')}
+                onBlur={(e) => (e.target.style.borderColor = errors.company ? 'var(--danger)' : 'var(--border)')}
                 {...register('company', { required: 'Required' })} />
               {errors.company && <span style={styles.error}>{errors.company.message}</span>}
             </div>
-            <button type="submit" style={styles.btn} disabled={isSubmitting}
+            <button type="submit" style={{ ...styles.btn, padding: '13px 20px', fontSize: '13px' }} disabled={isSubmitting}
               onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal-dark)')}
               onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}>
-              {isSubmitting ? 'Sending...' : 'Get Report ↓'}
+              {isSubmitting ? 'Sending...' : 'Send Report →'}
             </button>
           </div>
         ) : (
@@ -208,7 +220,7 @@ export default function LeadGateForm({ reportLabel, onSubmit, tool, score, horiz
               <input style={{ ...styles.input, ...(errors.company ? { borderColor: 'var(--danger)' } : {}) }}
                 placeholder="Your company or business"
                 onFocus={(e) => (e.target.style.borderColor = 'var(--teal)')}
-                onBlur={(e) => (e.target.style.borderColor = errors.company ? 'var(--danger)' : 'rgba(255,255,255,0.15)')}
+                onBlur={(e) => (e.target.style.borderColor = errors.company ? 'var(--danger)' : 'var(--border)')}
                 {...register('company', { required: 'Required' })} />
               {errors.company && <span style={styles.error}>{errors.company.message}</span>}
             </div>

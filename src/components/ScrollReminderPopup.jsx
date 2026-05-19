@@ -89,7 +89,7 @@ export default function ScrollReminderPopup() {
 
   const color   = result ? getScoreColor(result.score) : 'var(--teal)'
   const label   = result ? getScoreLabel(result.score) : ''
-  const savings = result ? `$${result.savings.toLocaleString()}` : ''
+  const savings = result?.savings != null ? `$${result.savings.toLocaleString()}` : ''
 
   const inputStyle = {
     flex: 1,
@@ -167,7 +167,10 @@ export default function ScrollReminderPopup() {
                     {label} — Your Report is Ready
                   </p>
                   <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.4 }}>
-                    Est. <strong style={{ color: 'var(--teal)' }}>{savings}</strong> in annual savings available. Don't leave without it.
+                    {result?.savings != null
+                      ? <>Est. <strong style={{ color: 'var(--teal)' }}>{savings}</strong> in annual savings available. Don't leave without it.</>
+                      : <>Your personalised report is ready. Get your full analysis and action plan.</>
+                    }
                   </p>
                 </div>
               </div>

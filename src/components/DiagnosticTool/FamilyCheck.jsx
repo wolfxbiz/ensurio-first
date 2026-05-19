@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import StepIndicator from './StepIndicator'
-import ScoreResult from './ScoreResult'
+import { ScoreRingOnly, ScoreLabelOnly } from './ScoreResult'
 import LeadGateForm from './LeadGateForm'
+import { useWindowWidth } from '../../hooks/useWindowWidth'
 
 const STEPS = ['Governance', 'Succession', 'Legacy']
 
@@ -39,85 +40,29 @@ const QUESTIONS = [
   },
 ]
 
-const s = {
-  qCard: {
-    background: 'var(--light-bg)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-md)',
-    padding: '0.875rem',
-    marginBottom: '0.75rem',
-  },
-  qText: { fontSize: '13px', fontWeight: 500, color: 'var(--text-dark)', lineHeight: 1.5, marginBottom: '0.625rem' },
-  optList: { display: 'flex', flexDirection: 'column', gap: '5px' },
-  opt: {
-    display: 'flex', alignItems: 'flex-start', gap: '8px',
-    padding: '7px 10px', border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-sm)', cursor: 'pointer',
-    fontSize: '12px', color: 'var(--text-muted)',
-    lineHeight: 1.4, background: 'var(--white)',
-    transition: 'all 0.15s', userSelect: 'none',
-  },
-  optSel: { borderColor: 'var(--teal)', background: 'var(--teal-pale)', color: 'var(--navy)', fontWeight: 500 },
-  radio: {
-    width: '13px', height: '13px', borderRadius: '50%',
-    border: '1.5px solid var(--border)', flexShrink: 0,
-    marginTop: '1px', transition: 'all 0.15s',
-  },
-  radioSel: { borderColor: 'var(--teal)', background: 'var(--teal)' },
-  btnRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.875rem' },
-  btnPrimary: {
-    background: 'var(--navy)', color: 'var(--white)', border: 'none',
-    padding: '9px 20px', borderRadius: 'var(--radius-md)',
-    fontSize: '13px', fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-body)',
-  },
-  btnOutline: {
-    background: 'transparent', color: 'var(--text-muted)',
-    border: '1px solid var(--border)', padding: '9px 16px',
-    borderRadius: 'var(--radius-md)', fontSize: '13px',
-    fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-body)',
-  },
-  matGrid: { display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '8px', marginBottom: '0.875rem' },
-  matCard: {
-    background: 'var(--light-bg)', border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-md)', padding: '0.75rem', textAlign: 'center',
-  },
-  matScore: { fontFamily: 'var(--font-heading)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--navy)', lineHeight: 1 },
-  matLabel: { fontSize: '10px', color: 'var(--text-muted)', marginTop: '4px' },
-  matBar: { height: '3px', borderRadius: '2px', background: 'var(--border)', marginTop: '8px', overflow: 'hidden' },
-  insightList: { listStyle: 'none', marginBottom: '0.875rem' },
-  insightItem: {
-    display: 'flex', gap: '8px', padding: '7px 0',
-    borderBottom: '1px solid var(--border)', fontSize: '12px',
-    color: 'var(--text-muted)', lineHeight: 1.5, alignItems: 'flex-start',
-  },
-  successWrap: { textAlign: 'center', padding: '2rem 1rem' },
-  successIcon: {
-    width: '56px', height: '56px', borderRadius: '50%',
-    background: 'var(--teal)', display: 'flex', alignItems: 'center',
-    justifyContent: 'center', margin: '0 auto 1rem', fontSize: '24px', color: 'var(--white)',
-  },
+const btnBase = {
+  border: 'none', padding: '10px 22px', fontSize: '13px', fontWeight: 600,
+  cursor: 'pointer', fontFamily: 'var(--font-body)', borderRadius: 0, transition: 'all 0.15s',
 }
 
 const slideVariants = {
-  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 30 : -30 }),
+  enter: (dir) => ({ opacity: 0, x: dir > 0 ? 28 : -28 }),
   center: { opacity: 1, x: 0 },
-  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -30 : 30 }),
+  exit: (dir) => ({ opacity: 0, x: dir > 0 ? -28 : 28 }),
 }
 
 function MatBar({ value }) {
+  const color = value < 40 ? '#EF4444' : value < 60 ? '#F59E0B' : value < 75 ? '#00B899' : '#10B981'
   return (
-    <div style={s.matBar}>
-      <motion.div
-        style={{ height: '100%', borderRadius: '2px', background: 'var(--teal)' }}
-        initial={{ width: 0 }}
-        animate={{ width: `${value}%` }}
-        transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
-      />
+    <div style={{ height: '3px', background: 'var(--border)', marginTop: '8px', overflow: 'hidden' }}>
+      <motion.div style={{ height: '100%', background: color }} initial={{ width: 0 }} animate={{ width: `${value}%` }} transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }} />
     </div>
   )
 }
 
 export default function FamilyCheck() {
+  const width = useWindowWidth()
+  const isDesktop = width > 900
   const [step, setStep] = useState(0)
   const [dir, setDir] = useState(1)
   const [answers, setAnswers] = useState({})
@@ -129,15 +74,13 @@ export default function FamilyCheck() {
   const stepQuestions = QUESTIONS.filter((q) => q.step === step)
 
   const next = () => {
-    const missing = stepQuestions.find((q) => answers[q.key] === undefined)
-    if (missing) return alert('Please answer all questions before continuing.')
+    if (stepQuestions.find((q) => answers[q.key] === undefined)) return alert('Please answer all questions before continuing.')
     setDir(1); setStep((s) => s + 1)
   }
   const back = () => { setDir(-1); setStep((s) => s - 1) }
 
   const generate = () => {
-    const missing = stepQuestions.find((q) => answers[q.key] === undefined)
-    if (missing) return alert('Please answer all questions before continuing.')
+    if (stepQuestions.find((q) => answers[q.key] === undefined)) return alert('Please answer all questions before continuing.')
     const gov = Math.round(((answers.q1 || 0) + (answers.q2 || 0)) / 6 * 100)
     const suc = Math.round(((answers.q3 || 0) + (answers.q4 || 0)) / 6 * 100)
     const leg = Math.round(((answers.q5 || 0) + (answers.q6 || 0)) / 6 * 100)
@@ -155,19 +98,24 @@ export default function FamilyCheck() {
     insights.push({ icon: '✓', text: 'A structured consultation with our Management Consultancy team will map your highest-priority actions and a clear path forward.' })
     setResult({ total, gov, suc, leg, desc, insights })
     setDone(true)
+    window.dispatchEvent(new CustomEvent('ensurio:result', { detail: { score: total, savings: null } }))
   }
 
   const reset = () => { setStep(0); setDone(false); setSubmitted(false); setResult(null); setAnswers({}) }
 
   if (submitted) {
     return (
-      <motion.div style={s.successWrap} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <div style={s.successIcon}>✓</div>
+      <motion.div style={{ textAlign: 'center', padding: '2.5rem 1rem' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <div style={{ width: '52px', height: '52px', background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem', fontSize: '22px', color: 'var(--white)' }}>✓</div>
         <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--navy)' }}>Playbook on its Way!</h3>
         <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6 }}>
           Your Family Business Continuity Playbook will be sent within one business day. Our team may reach out to arrange a complimentary discovery session.
         </p>
-        <button style={{ ...s.btnOutline, marginTop: '1.25rem' }} onClick={reset}>Start New Assessment</button>
+        <button style={{ ...btnBase, background: 'var(--navy)', color: 'var(--white)', marginTop: '1.5rem' }} onClick={reset}
+          onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal)')}
+          onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--navy)')}>
+          Start New Assessment
+        </button>
       </motion.div>
     )
   }
@@ -177,55 +125,171 @@ export default function FamilyCheck() {
       <StepIndicator steps={STEPS} current={done ? 3 : step} />
 
       <AnimatePresence mode="wait" custom={dir}>
+        {/* ── Question steps ── */}
         {!done && (
-          <motion.div key={`step-${step}`} custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.28 }}>
+          <motion.div key={`step-${step}`} custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.25 }}>
             {stepQuestions.map((q) => (
-              <div key={q.key} style={s.qCard}>
-                <div style={s.qText}>{q.text}</div>
-                <div style={s.optList}>
+              <div key={q.key} style={{ background: 'var(--light-bg)', border: '1px solid var(--border)', padding: '0.875rem', marginBottom: '0.75rem' }}>
+                <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-dark)', lineHeight: 1.5, marginBottom: '0.625rem' }}>{q.text}</div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                   {q.options.map((opt, i) => {
                     const sel = answers[q.key] === i
                     return (
-                      <div key={i} style={{ ...s.opt, ...(sel ? s.optSel : {}) }} onClick={() => answer(q.key, i)}>
-                        <div style={{ ...s.radio, ...(sel ? s.radioSel : {}) }} />
+                      <motion.div
+                        key={i}
+                        onClick={() => answer(q.key, i)}
+                        whileHover={{ y: -1 }}
+                        whileTap={{ scale: 0.98 }}
+                        style={{
+                          display: 'flex', alignItems: 'flex-start', gap: '8px',
+                          padding: '8px 10px',
+                          border: `2px solid ${sel ? 'var(--teal)' : 'var(--border)'}`,
+                          background: sel ? 'var(--teal-pale)' : 'var(--white)',
+                          cursor: 'pointer', fontSize: '12px',
+                          color: sel ? 'var(--navy)' : 'var(--text-muted)',
+                          fontWeight: sel ? 500 : 400,
+                          lineHeight: 1.4, userSelect: 'none', transition: 'all 0.15s',
+                        }}
+                      >
+                        <span style={{
+                          width: '14px', height: '14px', flexShrink: 0, marginTop: '1px',
+                          background: sel ? 'var(--teal)' : 'transparent',
+                          border: `2px solid ${sel ? 'var(--teal)' : 'var(--border)'}`,
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          fontSize: '8px', color: 'var(--white)', fontWeight: 700, transition: 'all 0.15s',
+                        }}>
+                          {sel ? '✓' : ''}
+                        </span>
                         {opt}
-                      </div>
+                      </motion.div>
                     )
                   })}
                 </div>
               </div>
             ))}
-            <div style={s.btnRow}>
-              {step > 0 ? <button style={s.btnOutline} onClick={back}>← Back</button> : <span />}
-              {step < 2
-                ? <button style={s.btnPrimary} onClick={next}>Continue →</button>
-                : <button style={s.btnPrimary} onClick={generate}>Generate Report →</button>
-              }
+
+            {/* Button row */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem' }}>
+              {step > 0 ? (
+                <button style={{ ...btnBase, background: 'transparent', color: 'var(--text-muted)', border: '2px solid var(--border)', padding: '10px 16px' }} onClick={back}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--navy)'; e.currentTarget.style.color = 'var(--navy)' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text-muted)' }}>
+                  ← Back
+                </button>
+              ) : <span />}
+              <button
+                style={{ ...btnBase, background: step < 2 ? 'var(--navy)' : 'var(--teal)', color: 'var(--white)' }}
+                onClick={step < 2 ? next : generate}
+                onMouseEnter={(e) => (e.currentTarget.style.background = step < 2 ? '#0a1640' : 'var(--teal-dark)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = step < 2 ? 'var(--navy)' : 'var(--teal)')}>
+                {step < 2 ? 'Continue →' : 'Generate Report →'}
+              </button>
             </div>
           </motion.div>
         )}
 
+        {/* ── Result ── */}
         {done && result && (
-          <motion.div key="result" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-            <ScoreResult score={result.total} description={result.desc} />
-            <div style={s.matGrid}>
-              {[['Governance', result.gov], ['Succession', result.suc], ['Legacy', result.leg]].map(([label, val]) => (
-                <div key={label} style={s.matCard}>
-                  <div style={s.matScore}>{val}</div>
-                  <div style={s.matLabel}>{label}</div>
-                  <MatBar value={val} />
+          <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+            {isDesktop ? (
+              <div>
+                {/* Zone 1 — Score header */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', padding: '1rem 1.25rem', background: 'var(--light-bg)', borderBottom: '1px solid var(--border)', marginBottom: '1rem' }}>
+                  <ScoreRingOnly score={result.total} />
+                  <div>
+                    <ScoreLabelOnly score={result.total} />
+                    <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6, maxWidth: '480px', marginTop: '4px' }}>{result.desc}</p>
+                  </div>
                 </div>
-              ))}
-            </div>
-            <ul style={s.insightList}>
-              {result.insights.map((ins, i) => (
-                <li key={i} style={s.insightItem}>
-                  <span style={{ flexShrink: 0, color: ins.icon === '✓' ? 'var(--teal)' : 'var(--warning)' }}>{ins.icon}</span>
-                  <span>{ins.text}</span>
-                </li>
-              ))}
-            </ul>
-            <LeadGateForm reportLabel="Family Business Continuity Playbook" onSubmit={() => setSubmitted(true)} />
+
+                {/* Zone 2 — Maturity scores | Insights */}
+                <div style={{ display: 'grid', gridTemplateColumns: '180px 1fr', background: 'var(--light-bg)', borderBottom: '1px solid var(--border)' }}>
+                  {/* Maturity panel */}
+                  <div style={{ background: 'var(--navy)', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '10px', justifyContent: 'center', borderRight: '1px solid rgba(255,255,255,0.08)' }}>
+                    <div style={{ fontSize: '9px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '2px' }}>Maturity Scores</div>
+                    {[['Governance', result.gov], ['Succession', result.suc], ['Legacy', result.leg]].map(([label, val]) => (
+                      <div key={label}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '3px' }}>
+                          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)' }}>{label}</span>
+                          <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 700, color: 'var(--teal)' }}>{val}</span>
+                        </div>
+                        <MatBar value={val} />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Insights */}
+                  <div style={{ padding: '0.875rem 1rem' }}>
+                    {result.insights.map((ins, i) => {
+                      const isPositive = ins.icon === '✓'
+                      return (
+                        <motion.div key={i} initial={{ opacity: 0, x: 8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.08, duration: 0.3 }}
+                          style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '8px 10px', marginBottom: i < result.insights.length - 1 ? '5px' : 0, background: isPositive ? 'rgba(0,184,153,0.07)' : 'rgba(245,158,11,0.07)', borderLeft: `3px solid ${isPositive ? 'var(--teal)' : '#F59E0B'}` }}>
+                          <span style={{ flexShrink: 0, width: '20px', height: '20px', background: isPositive ? 'var(--teal)' : '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: 'var(--white)', fontWeight: 800, marginTop: '1px' }}>
+                            {isPositive ? '✓' : '!'}
+                          </span>
+                          <span style={{ fontSize: '13px', color: 'var(--text-dark)', lineHeight: 1.6, fontWeight: isPositive ? 400 : 500 }}>{ins.text}</span>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </div>
+
+                {/* Zone 3 — Lead form */}
+                <LeadGateForm
+                  reportLabel="Family Business Continuity Playbook"
+                  tool="Family Business Readiness"
+                  score={result.total}
+                  onSubmit={() => { setSubmitted(true); window.dispatchEvent(new CustomEvent('ensurio:submitted')) }}
+                  horizontal
+                />
+              </div>
+            ) : (
+              /* Mobile stacked */
+              <>
+                {/* Score */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '0.875rem', background: 'var(--light-bg)', borderBottom: '1px solid var(--border)', marginBottom: '0.875rem' }}>
+                  <ScoreRingOnly score={result.total} />
+                  <div>
+                    <ScoreLabelOnly score={result.total} />
+                    <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: 1.5, marginTop: '3px' }}>{result.desc}</p>
+                  </div>
+                </div>
+
+                {/* Maturity scores */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--border)', marginBottom: '0.875rem' }}>
+                  {[['Governance', result.gov], ['Succession', result.suc], ['Legacy', result.leg]].map(([label, val]) => (
+                    <div key={label} style={{ background: 'var(--navy)', padding: '0.75rem', textAlign: 'center' }}>
+                      <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--teal)', lineHeight: 1 }}>{val}</div>
+                      <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.5)', marginTop: '4px' }}>{label}</div>
+                      <MatBar value={val} />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Insights */}
+                <div style={{ marginBottom: '0.875rem', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  {result.insights.map((ins, i) => {
+                    const isPositive = ins.icon === '✓'
+                    return (
+                      <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', padding: '10px 12px', background: isPositive ? 'rgba(0,184,153,0.07)' : 'rgba(245,158,11,0.07)', borderLeft: `3px solid ${isPositive ? 'var(--teal)' : '#F59E0B'}` }}>
+                        <span style={{ flexShrink: 0, width: '20px', height: '20px', background: isPositive ? 'var(--teal)' : '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: 'var(--white)', fontWeight: 800, marginTop: '1px' }}>
+                          {isPositive ? '✓' : '!'}
+                        </span>
+                        <span style={{ fontSize: '13px', color: 'var(--text-dark)', lineHeight: 1.6, fontWeight: isPositive ? 400 : 500 }}>{ins.text}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                <LeadGateForm
+                  reportLabel="Family Business Continuity Playbook"
+                  tool="Family Business Readiness"
+                  score={result.total}
+                  onSubmit={() => { setSubmitted(true); window.dispatchEvent(new CustomEvent('ensurio:submitted')) }}
+                />
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
