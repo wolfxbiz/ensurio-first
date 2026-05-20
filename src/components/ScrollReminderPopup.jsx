@@ -36,7 +36,7 @@ function useIsMobile() {
 }
 
 /* Shared popup wrapper — mobile snaps full-width to bottom, desktop floats centered */
-function PopupWrap({ children, topColor, onBackdrop }) {
+function PopupWrap({ children, topColor, onBackdrop, light = false }) {
   const isMobile = useIsMobile()
   return (
     <>
@@ -57,9 +57,10 @@ function PopupWrap({ children, topColor, onBackdrop }) {
           ),
           zIndex: 9001,
           width: isMobile ? '100%' : undefined,
-          background: 'var(--navy)',
-          boxShadow: '0 -8px 40px rgba(13,27,75,0.4)',
+          background: light ? 'var(--white)' : 'var(--navy)',
+          boxShadow: light ? '0 -8px 48px rgba(13,27,75,0.18)' : '0 -8px 40px rgba(13,27,75,0.4)',
           overflow: 'hidden',
+          border: light ? '1px solid var(--border)' : 'none',
         }}
       >
         <div style={{ height: '3px', background: topColor || 'var(--teal)' }} />
@@ -86,9 +87,11 @@ function BannerWrap({ children, topColor, onClick }) {
         ),
         zIndex: 8999,
         width: isMobile ? '100%' : undefined,
-        background: 'var(--navy)',
+        background: 'var(--white)',
         borderTop: `3px solid ${topColor || 'var(--teal)'}`,
-        boxShadow: '0 -4px 32px rgba(13,27,75,0.28)',
+        borderLeft: isMobile ? 'none' : '1px solid var(--border)',
+        borderRight: isMobile ? 'none' : '1px solid var(--border)',
+        boxShadow: '0 -4px 32px rgba(13,27,75,0.12)',
         cursor: 'pointer',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '10px 16px', gap: '12px',
@@ -197,9 +200,9 @@ export default function ScrollReminderPopup() {
 
   const inputBase = {
     padding: '10px 12px',
-    border: '2px solid rgba(255,255,255,0.15)',
-    background: 'rgba(255,255,255,0.08)',
-    color: 'var(--white)',
+    border: '2px solid var(--border)',
+    background: 'var(--white)',
+    color: 'var(--text-dark)',
     fontSize: '13px',
     fontFamily: 'var(--font-body)',
     outline: 'none',
@@ -213,17 +216,17 @@ export default function ScrollReminderPopup() {
       {/* ── 1. REPORT REMINDER popup ─────────────────────────────────────── */}
       <AnimatePresence>
         {visible && (
-          <PopupWrap topColor={color} onBackdrop={dismissReminder}>
+          <PopupWrap topColor={color} onBackdrop={dismissReminder} light>
             {/* Header */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '0.75rem 1rem' : '1rem 1.25rem 0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '0.75rem 1rem' : '1rem 1.25rem 0.75rem', borderBottom: '1px solid var(--border)', gap: '0.75rem' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: 0 }}>
                 <div style={{ width: isMobile ? '36px' : '44px', height: isMobile ? '36px' : '44px', border: `2.5px solid ${color}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <span style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '0.85rem' : '1rem', fontWeight: 800, color, lineHeight: 1 }}>{result?.score}</span>
-                  <span style={{ fontSize: '8px', color: 'rgba(255,255,255,0.4)' }}>/100</span>
+                  <span style={{ fontSize: '8px', color: 'var(--text-muted)' }}>/100</span>
                 </div>
                 <div style={{ minWidth: 0 }}>
                   <p style={{ fontSize: '10px', fontWeight: 700, color, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: '2px' }}>{label} — Report Ready</p>
-                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.4, whiteSpace: isMobile ? 'normal' : undefined }}>
+                  <p style={{ fontSize: '12px', color: 'var(--text-muted)', lineHeight: 1.4 }}>
                     {result?.savings != null
                       ? <>Est. <strong style={{ color: 'var(--teal)' }}>{savings}</strong> in annual savings. Don't leave without it.</>
                       : <>Your personalised report is ready. Get your full analysis.</>
@@ -231,7 +234,7 @@ export default function ScrollReminderPopup() {
                   </p>
                 </div>
               </div>
-              <button onClick={dismissReminder} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '20px', lineHeight: 1, padding: '4px', flexShrink: 0 }} aria-label="Close">×</button>
+              <button onClick={dismissReminder} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '20px', lineHeight: 1, padding: '4px', flexShrink: 0 }} aria-label="Close">×</button>
             </div>
 
             {/* Form */}
@@ -246,11 +249,11 @@ export default function ScrollReminderPopup() {
                     <input {...register('name', { required: true })} placeholder="Full Name"
                       style={{ ...inputBase, ...(errors.name ? { borderColor: 'var(--danger)' } : {}), flex: isMobile ? undefined : 1 }}
                       onFocus={(e) => (e.target.style.borderColor = 'var(--teal)')}
-                      onBlur={(e) => (e.target.style.borderColor = errors.name ? 'var(--danger)' : 'rgba(255,255,255,0.15)')} />
+                      onBlur={(e) => (e.target.style.borderColor = errors.name ? 'var(--danger)' : 'var(--border)')} />
                     <input {...register('email', { required: true, pattern: /\S+@\S+\.\S+/ })} type="email" placeholder="Work Email"
                       style={{ ...inputBase, ...(errors.email ? { borderColor: 'var(--danger)' } : {}), flex: isMobile ? undefined : 1 }}
                       onFocus={(e) => (e.target.style.borderColor = 'var(--teal)')}
-                      onBlur={(e) => (e.target.style.borderColor = errors.email ? 'var(--danger)' : 'rgba(255,255,255,0.15)')} />
+                      onBlur={(e) => (e.target.style.borderColor = errors.email ? 'var(--danger)' : 'var(--border)')} />
                     <button type="submit" disabled={status === 'sending'}
                       style={{ background: 'var(--teal)', color: 'var(--white)', border: 'none', padding: '11px 20px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', fontFamily: 'var(--font-body)', borderRadius: 0, whiteSpace: 'nowrap', transition: 'background 0.2s' }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal-dark)')}
@@ -259,7 +262,7 @@ export default function ScrollReminderPopup() {
                     </button>
                   </div>
                   {status === 'error' && <p style={{ fontSize: '11px', color: 'var(--danger)', marginTop: '6px' }}>Could not send — email us at consult@insurefirst.ae</p>}
-                  <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '8px' }}>🔒 Strictly confidential. No spam.</p>
+                  <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '8px' }}>Strictly confidential. No spam.</p>
                 </form>
               )}
             </div>
@@ -277,7 +280,7 @@ export default function ScrollReminderPopup() {
               </div>
               <div style={{ minWidth: 0 }}>
                 <p style={{ fontSize: '11px', fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1px', whiteSpace: 'nowrap' }}>Your report is ready</p>
-                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <p style={{ fontSize: '11px', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {result?.savings != null ? `Est. ${savings} in annual savings` : 'Tap to get your free report'}
                 </p>
               </div>
@@ -286,7 +289,7 @@ export default function ScrollReminderPopup() {
               <span style={{ background: 'var(--teal)', color: 'var(--white)', padding: isMobile ? '6px 12px' : '7px 14px', fontSize: '12px', fontWeight: 700, fontFamily: 'var(--font-body)', whiteSpace: 'nowrap' }}>
                 Get Report →
               </span>
-              <button onClick={fullyDismissRem} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.35)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
+              <button onClick={fullyDismissRem} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
             </div>
           </BannerWrap>
         )}
@@ -295,7 +298,7 @@ export default function ScrollReminderPopup() {
       {/* ── 2. "TRY THE TOOL" popup ──────────────────────────────────────── */}
       <AnimatePresence>
         {toolPromptVisible && !result && (
-          <PopupWrap topColor="var(--teal)" onBackdrop={dismissToolPrompt}>
+          <PopupWrap topColor="var(--teal)" onBackdrop={dismissToolPrompt} light>
             <div style={{ padding: isMobile ? '1rem' : '1.25rem 1.5rem' }}>
               {/* Header row */}
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.875rem' }}>
@@ -305,25 +308,25 @@ export default function ScrollReminderPopup() {
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <p style={{ fontSize: '10px', fontWeight: 700, color: 'var(--teal)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '3px' }}>Free Diagnostic Tool</p>
-                    <p style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '0.95rem' : '1.05rem', fontWeight: 800, color: 'var(--white)', lineHeight: 1.25 }}>
+                    <p style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '0.95rem' : '1.05rem', fontWeight: 800, color: 'var(--navy)', lineHeight: 1.25 }}>
                       Are You Overpaying on Insurance?
                     </p>
                   </div>
                 </div>
-                <button onClick={dismissToolPrompt} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '20px', lineHeight: 1, padding: '4px', flexShrink: 0 }} aria-label="Close">×</button>
+                <button onClick={dismissToolPrompt} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '20px', lineHeight: 1, padding: '4px', flexShrink: 0 }} aria-label="Close">×</button>
               </div>
 
-              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.6, marginBottom: '1rem' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1rem' }}>
                 Get a free risk score and estimated savings in under 2 minutes — no sign-up required.
               </p>
 
               {/* Stats + CTA */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '0.875rem', gap: '12px', flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border)', paddingTop: '0.875rem', gap: '12px', flexWrap: isMobile ? 'wrap' : 'nowrap' }}>
                 <div style={{ display: 'flex', gap: isMobile ? '1.25rem' : '1.5rem' }}>
                   {[['2 min', 'to complete'], ['Free', 'no cost'], ['500+', 'checked']].map(([num, lbl]) => (
                     <div key={num}>
                       <div style={{ fontFamily: 'var(--font-heading)', fontSize: '0.95rem', fontWeight: 800, color: 'var(--teal)', lineHeight: 1 }}>{num}</div>
-                      <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.4)', marginTop: '2px' }}>{lbl}</div>
+                      <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '2px' }}>{lbl}</div>
                     </div>
                   ))}
                 </div>
@@ -347,14 +350,14 @@ export default function ScrollReminderPopup() {
               <div style={{ width: '30px', height: '30px', background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '13px' }}>📊</div>
               <div style={{ minWidth: 0 }}>
                 <p style={{ fontSize: '11px', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1px', whiteSpace: 'nowrap' }}>Free Risk Assessment</p>
-                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Find out if you're overpaying — 2 min</p>
+                <p style={{ fontSize: '11px', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Find out if you're overpaying — 2 min</p>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
               <span onClick={(e) => { e.stopPropagation(); goToTool() }} style={{ background: 'var(--teal)', color: 'var(--white)', padding: isMobile ? '6px 12px' : '7px 14px', fontSize: '12px', fontWeight: 700, fontFamily: 'var(--font-body)', whiteSpace: 'nowrap' }}>
                 Try Free Tool →
               </span>
-              <button onClick={fullyDismissTool} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.35)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
+              <button onClick={fullyDismissTool} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
             </div>
           </BannerWrap>
         )}

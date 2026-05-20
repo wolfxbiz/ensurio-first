@@ -5,13 +5,65 @@ import ContactSection from '../components/ContactSection'
 import { useWindowWidth } from '../hooks/useWindowWidth'
 import advisorImg from '../assets/advisor-agreement.jpg'
 
+const SVC_ICONS = {
+  succession: (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+      <circle cx="14" cy="5" r="3"/>
+      <circle cx="6" cy="22" r="3"/>
+      <circle cx="22" cy="22" r="3"/>
+      <line x1="14" y1="8" x2="14" y2="14"/>
+      <line x1="14" y1="14" x2="6" y2="19"/>
+      <line x1="14" y1="14" x2="22" y2="19"/>
+    </svg>
+  ),
+  estate: (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+      <path d="M14 3L4 7v8c0 5 4.5 9 10 10 5.5-1 10-5 10-10V7L14 3z"/>
+      <polyline points="10,14 13,17 18,11"/>
+    </svg>
+  ),
+  governance: (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+      <rect x="4" y="3" width="20" height="22"/>
+      <line x1="9" y1="9" x2="19" y2="9"/>
+      <line x1="9" y1="14" x2="19" y2="14"/>
+      <line x1="9" y1="19" x2="15" y2="19"/>
+    </svg>
+  ),
+  valuation: (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+      <polyline points="4,24 4,4"/>
+      <polyline points="4,24 24,24"/>
+      <polyline points="6,18 11,10 16,13 22,6"/>
+      <polyline points="18,6 22,6 22,10"/>
+    </svg>
+  ),
+  trust: (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+      <circle cx="9" cy="11" r="4"/>
+      <circle cx="19" cy="11" r="4"/>
+      <path d="M2 24c0-4 3-6 7-6M26 24c0-4-3-6-7-6M14 18c-2 0-5 1-5 6M14 18c2 0 5 1 5 6"/>
+    </svg>
+  ),
+  efficiency: (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" strokeLinejoin="miter">
+      <line x1="4" y1="8" x2="24" y2="8"/>
+      <line x1="4" y1="14" x2="24" y2="14"/>
+      <line x1="4" y1="20" x2="24" y2="20"/>
+      <rect x="7" y="5.5" width="5" height="5" fill="var(--white)" stroke="currentColor"/>
+      <rect x="16" y="11.5" width="5" height="5" fill="var(--white)" stroke="currentColor"/>
+      <rect x="10" y="17.5" width="5" height="5" fill="var(--white)" stroke="currentColor"/>
+    </svg>
+  ),
+}
+
 const MGMT_SERVICES = [
-  { icon: '⚖', title: 'Family Business Succession Planning', desc: 'Navigating the transition of leadership and ownership to the next generation with structured legal and operational frameworks.' },
-  { icon: '📜', title: 'Estate & Legacy Structuring', desc: 'Strategic guidance on creating legally sound corporate Wills and estate structures that protect intergenerational wealth.' },
-  { icon: '📋', title: 'Family Business Governance', desc: "Drafting MOA & AOA specifically tailored for family businesses to pass seamlessly to the owners' children." },
-  { icon: '📈', title: 'Business Valuation & Exit Strategies', desc: 'Finding the optimal path to sell your business with adequately appreciated value and market positioning.' },
-  { icon: '🤝', title: 'Stakeholder Trust & Relationship Building', desc: 'Creating institutional trust with suppliers and buyers through transparent, sustainable communication strategies.' },
-  { icon: '⚙', title: 'Operational Efficiency & Process Optimisation', desc: 'Analyzing workflows to eliminate redundancies, reduce overheads, and improve productivity across the organization.' },
+  { icon: SVC_ICONS.succession, title: 'Family Business Succession Planning', desc: 'Navigating the transition of leadership and ownership to the next generation with structured legal and operational frameworks.' },
+  { icon: SVC_ICONS.estate, title: 'Estate & Legacy Structuring', desc: 'Strategic guidance on creating legally sound corporate Wills and estate structures that protect intergenerational wealth.' },
+  { icon: SVC_ICONS.governance, title: 'Family Business Governance', desc: "Drafting MOA & AOA specifically tailored for family businesses to pass seamlessly to the owners' children." },
+  { icon: SVC_ICONS.valuation, title: 'Business Valuation & Exit Strategies', desc: 'Finding the optimal path to sell your business with adequately appreciated value and market positioning.' },
+  { icon: SVC_ICONS.trust, title: 'Stakeholder Trust & Relationship Building', desc: 'Creating institutional trust with suppliers and buyers through transparent, sustainable communication strategies.' },
+  { icon: SVC_ICONS.efficiency, title: 'Operational Efficiency & Process Optimisation', desc: 'Analyzing workflows to eliminate redundancies, reduce overheads, and improve productivity across the organization.' },
 ]
 
 const STATS = [
@@ -161,7 +213,7 @@ export default function ManagementConsultancyPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--border)' }} className="services-mgmt">
             {MGMT_SERVICES.map((svc, i) => (
               <motion.div key={svc.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.45 }} whileHover={{ background: 'var(--teal-pale)' }} style={{ background: 'var(--white)', padding: '1.75rem' }}>
-                <span style={{ fontSize: '26px', marginBottom: '0.75rem', display: 'block' }}>{svc.icon}</span>
+                <span style={{ color: 'var(--navy)', display: 'block', marginBottom: '1rem' }}>{svc.icon}</span>
                 <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--navy)', marginBottom: '0.4rem', fontFamily: 'var(--font-heading)' }}>{svc.title}</div>
                 <div style={{ fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.7 }}>{svc.desc}</div>
               </motion.div>

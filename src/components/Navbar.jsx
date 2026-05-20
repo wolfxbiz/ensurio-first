@@ -18,9 +18,18 @@ export default function Navbar() {
       <div style={{ background: 'var(--navy)', padding: '7px 0', fontSize: '12px', color: 'rgba(255,255,255,0.65)' }} className="topbar">
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <a href="mailto:consult@insurefirst.ae" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'inherit', textDecoration: 'none' }}>📧 consult@insurefirst.ae</a>
-            <a href="tel:+971509765976" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'inherit', textDecoration: 'none' }}>📞 +971 50 976 5976</a>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>📍 DMCC Business Centre, Dubai</span>
+            <a href="mailto:consult@insurefirst.ae" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'inherit', textDecoration: 'none' }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square"><rect x="2" y="4" width="20" height="16"/><polyline points="2,4 12,13 22,4"/></svg>
+              consult@insurefirst.ae
+            </a>
+            <a href="tel:+971509765976" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'inherit', textDecoration: 'none' }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 014 6a2 2 0 012-2z"/></svg>
+              +971 50 976 5976
+            </a>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              DMCC Business Centre, Dubai
+            </span>
           </div>
           <span style={{ color: 'var(--teal)', fontWeight: 600, fontSize: '11px', letterSpacing: '0.02em' }} className="topbar-rebrand">
             ✦ Now operating as Ensurio First

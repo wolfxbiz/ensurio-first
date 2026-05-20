@@ -24,7 +24,8 @@ export default function WhatsAppButton() {
     }
   }, [])
 
-  const bottomOffset = bannerUp ? 28 + BANNER_HEIGHT + 10 : 28
+  const isMobile = window.innerWidth < 600
+  const bottomOffset = (bannerUp && isMobile) ? 28 + BANNER_HEIGHT + 10 : 28
 
   return (
     <motion.div

@@ -7,21 +7,45 @@ const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
 const EMAILJS_TEMPLATE_ID = 'YOUR_CONTACT_TEMPLATE_ID'
 const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
 
+const IconEmail = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square">
+    <rect x="2" y="4" width="20" height="16"/><polyline points="2,4 12,13 22,4"/>
+  </svg>
+)
+const IconPhone = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square">
+    <path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 014 6a2 2 0 012-2z"/>
+  </svg>
+)
+const IconPin = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+    <circle cx="12" cy="9" r="2.5"/>
+  </svg>
+)
+const IconMail = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="square">
+    <path d="M4 4h16v13a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/>
+    <polyline points="4,4 12,13 20,4"/>
+    <line x1="4" y1="20" x2="8" y2="16"/><line x1="20" y1="20" x2="16" y2="16"/>
+  </svg>
+)
+
 const CONTACT_INFO = [
   {
-    icon: '📧',
+    icon: <IconEmail />,
     label: 'Email Address',
     lines: ['consult@insurefirst.ae', 'lobo@insurefirst.ae'],
     href: ['mailto:consult@insurefirst.ae', 'mailto:lobo@insurefirst.ae'],
   },
   {
-    icon: '📞',
+    icon: <IconPhone />,
     label: 'Phone Number',
     lines: ['+971 50 976 5976'],
     href: ['tel:+971509765976'],
   },
   {
-    icon: '📍',
+    icon: <IconPin />,
     label: 'Office Address',
     lines: [
       'Unit No: BA574, DMCC Business Centre',
@@ -30,7 +54,7 @@ const CONTACT_INFO = [
     ],
   },
   {
-    icon: '📬',
+    icon: <IconMail />,
     label: 'Mailing Address',
     lines: ['P.O.Box 35973, Dubai, DMCC', 'United Arab Emirates'],
   },
