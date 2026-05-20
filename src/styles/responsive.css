@@ -29,6 +29,10 @@
     grid-template-columns: 1fr !important;
   }
 
+  .about-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
   .contact-inner {
     grid-template-columns: 1fr !important;
   }

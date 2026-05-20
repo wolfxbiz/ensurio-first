@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import FamilyCheck from '../components/DiagnosticTool/FamilyCheck'
 import AboutSection from '../components/AboutSection'
+import aboutImg from '../assets/advisor-documents.jpg'
 import ContactSection from '../components/ContactSection'
 import { useWindowWidth } from '../hooks/useWindowWidth'
 import advisorImg from '../assets/advisor-agreement.jpg'
@@ -238,7 +239,7 @@ export default function ManagementConsultancyPage() {
       </section>
 
       {/* ── About ────────────────────────────────────────────────────────── */}
-      <AboutSection />
+      <AboutSection image={aboutImg} imagePosition="left" />
 
       {/* ── Contact + Map ────────────────────────────────────────────────── */}
       <ContactSection />

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PremiumCheck from '../components/DiagnosticTool/PremiumCheck'
 import AboutSection from '../components/AboutSection'
+import aboutImg from '../assets/advisor-handshake.jpg'
 import ContactSection from '../components/ContactSection'
 import { useWindowWidth } from '../hooks/useWindowWidth'
 import advisorImg from '../assets/advisor-couple.jpg'
@@ -185,7 +186,7 @@ export default function RiskManagementPage() {
       </section>
 
       {/* ── About ────────────────────────────────────────────────────────── */}
-      <AboutSection />
+      <AboutSection image={aboutImg} imagePosition="right" />
 
       {/* ── Contact + Map ────────────────────────────────────────────────── */}
       <ContactSection />
