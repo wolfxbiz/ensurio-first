@@ -158,7 +158,7 @@ export default function LeadGateForm({ reportLabel, onSubmit, tool, score, horiz
       <form onSubmit={handleSubmit(submit)} noValidate>
         {horizontal ? (
           /* Horizontal layout */
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '8px', alignItems: 'end' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '8px', alignItems: 'start' }}>
             <div style={styles.field}>
               <label style={styles.label}>Full Name</label>
               <input style={{ ...styles.input, ...(errors.name ? { borderColor: 'var(--danger)' } : {}) }}
@@ -186,11 +186,14 @@ export default function LeadGateForm({ reportLabel, onSubmit, tool, score, horiz
                 {...register('company', { required: 'Required' })} />
               {errors.company && <span style={styles.error}>{errors.company.message}</span>}
             </div>
-            <button type="submit" style={{ ...styles.btn, padding: '13px 20px', fontSize: '13px' }} disabled={isSubmitting}
-              onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal-dark)')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}>
-              {isSubmitting ? 'Sending...' : 'Send Report →'}
-            </button>
+            <div style={styles.field}>
+              <label style={{ ...styles.label, visibility: 'hidden' }}>Submit</label>
+              <button type="submit" style={{ ...styles.btn, width: '100%', justifyContent: 'center', padding: '12px 16px', fontSize: '13px' }} disabled={isSubmitting}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--teal-dark)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--teal)')}>
+                {isSubmitting ? 'Sending...' : 'Send Report →'}
+              </button>
+            </div>
           </div>
         ) : (
           /* Default stacked layout */

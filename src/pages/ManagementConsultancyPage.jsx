@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import FamilyCheck from '../components/DiagnosticTool/FamilyCheck'
 import AboutSection from '../components/AboutSection'
 import ContactSection from '../components/ContactSection'
@@ -69,11 +68,6 @@ export default function ManagementConsultancyPage() {
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--navy)')}>
                 Book a Free Consultation →
               </a>
-              <Link to="/risk-management" style={{ background: 'transparent', color: 'var(--navy)', padding: '12px 24px', fontSize: '13.5px', fontWeight: 700, textDecoration: 'none', display: 'inline-block', border: '2px solid var(--border)', transition: 'border-color 0.2s, color 0.2s' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--teal)'; e.currentTarget.style.color = 'var(--teal)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--navy)' }}>
-                Risk Management
-              </Link>
             </motion.div>
 
             <motion.div variants={itemVariants} style={{ display: 'flex', gap: '2.5rem', paddingTop: '2rem', borderTop: '2px solid var(--border)', flexWrap: 'wrap' }}>

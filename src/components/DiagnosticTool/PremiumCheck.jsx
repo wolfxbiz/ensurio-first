@@ -291,23 +291,21 @@ export default function PremiumCheck() {
         {!done && step === 0 && (
           <motion.div key="s0" custom={dir} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.25 }}>
             {isDesktop ? (
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', alignItems: 'start' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
-                  <div style={{ marginBottom: '1rem' }}>
-                    <FieldLabel>Industry Sector</FieldLabel>
-                    <select style={{ ...selectStyle, borderColor: form.industry ? 'var(--navy)' : 'var(--border)' }} value={form.industry} onChange={(e) => set('industry', e.target.value)} onFocus={(e) => (e.target.style.borderColor = 'var(--navy)')} onBlur={(e) => (e.target.style.borderColor = form.industry ? 'var(--navy)' : 'var(--border)')}>
-                      <option value="">Select your sector</option>
-                      {INDUSTRIES.map((v) => <option key={v}>{v}</option>)}
-                    </select>
-                  </div>
-                  <div>
-                    <FieldLabel>Company Size</FieldLabel>
-                    <TileGrid options={SIZES} value={form.size} onChange={(v) => set('size', v)} cols={2} />
-                  </div>
+                  <FieldLabel>Industry Sector</FieldLabel>
+                  <select style={{ ...selectStyle, borderColor: form.industry ? 'var(--navy)' : 'var(--border)' }} value={form.industry} onChange={(e) => set('industry', e.target.value)} onFocus={(e) => (e.target.style.borderColor = 'var(--navy)')} onBlur={(e) => (e.target.style.borderColor = form.industry ? 'var(--navy)' : 'var(--border)')}>
+                    <option value="">Select your sector</option>
+                    {INDUSTRIES.map((v) => <option key={v}>{v}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <FieldLabel>Company Size</FieldLabel>
+                  <TileGrid options={SIZES} value={form.size} onChange={(v) => set('size', v)} cols={4} />
                 </div>
                 <div>
                   <FieldLabel>Annual Turnover (USD)</FieldLabel>
-                  <TileGrid options={TURNOVERS} value={form.turnover} onChange={(v) => set('turnover', v)} cols={2} />
+                  <TileGrid options={TURNOVERS} value={form.turnover} onChange={(v) => set('turnover', v)} cols={5} />
                 </div>
               </div>
             ) : (

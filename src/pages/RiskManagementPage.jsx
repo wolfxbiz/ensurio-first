@@ -67,11 +67,6 @@ export default function RiskManagementPage() {
                 onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--navy)')}>
                 Book a Free Consultation →
               </a>
-              <Link to="/management-consultancy" style={{ background: 'transparent', color: 'var(--navy)', padding: '12px 24px', fontSize: '13.5px', fontWeight: 700, textDecoration: 'none', display: 'inline-block', border: '2px solid var(--border)', transition: 'border-color 0.2s, color 0.2s' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--teal)'; e.currentTarget.style.color = 'var(--teal)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--navy)' }}>
-                Management Consultancy
-              </Link>
             </motion.div>
 
             <motion.div variants={itemVariants} style={{ display: 'flex', gap: '2.5rem', paddingTop: '2rem', borderTop: '2px solid var(--border)', flexWrap: 'wrap' }}>
