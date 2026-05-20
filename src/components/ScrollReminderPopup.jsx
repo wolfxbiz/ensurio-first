@@ -87,11 +87,9 @@ function BannerWrap({ children, topColor, onClick }) {
         ),
         zIndex: 8999,
         width: isMobile ? '100%' : undefined,
-        background: 'var(--white)',
+        background: 'var(--navy)',
         borderTop: `3px solid ${topColor || 'var(--teal)'}`,
-        borderLeft: isMobile ? 'none' : '1px solid var(--border)',
-        borderRight: isMobile ? 'none' : '1px solid var(--border)',
-        boxShadow: '0 -4px 32px rgba(13,27,75,0.12)',
+        boxShadow: '0 -4px 32px rgba(13,27,75,0.35)',
         cursor: 'pointer',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: '10px 16px', gap: '12px',
@@ -280,7 +278,7 @@ export default function ScrollReminderPopup() {
               </div>
               <div style={{ minWidth: 0 }}>
                 <p style={{ fontSize: '11px', fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1px', whiteSpace: 'nowrap' }}>Your report is ready</p>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {result?.savings != null ? `Est. ${savings} in annual savings` : 'Tap to get your free report'}
                 </p>
               </div>
@@ -289,7 +287,7 @@ export default function ScrollReminderPopup() {
               <span style={{ background: 'var(--teal)', color: 'var(--white)', padding: isMobile ? '6px 12px' : '7px 14px', fontSize: '12px', fontWeight: 700, fontFamily: 'var(--font-body)', whiteSpace: 'nowrap' }}>
                 Get Report →
               </span>
-              <button onClick={fullyDismissRem} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
+              <button onClick={fullyDismissRem} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
             </div>
           </BannerWrap>
         )}
@@ -350,14 +348,14 @@ export default function ScrollReminderPopup() {
               <div style={{ width: '30px', height: '30px', background: 'var(--teal)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '13px' }}>📊</div>
               <div style={{ minWidth: 0 }}>
                 <p style={{ fontSize: '11px', fontWeight: 700, color: 'var(--teal)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1px', whiteSpace: 'nowrap' }}>Free Risk Assessment</p>
-                <p style={{ fontSize: '11px', color: 'var(--text-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Find out if you're overpaying — 2 min</p>
+                <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Find out if you're overpaying — 2 min</p>
               </div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
               <span onClick={(e) => { e.stopPropagation(); goToTool() }} style={{ background: 'var(--teal)', color: 'var(--white)', padding: isMobile ? '6px 12px' : '7px 14px', fontSize: '12px', fontWeight: 700, fontFamily: 'var(--font-body)', whiteSpace: 'nowrap' }}>
                 Try Free Tool →
               </span>
-              <button onClick={fullyDismissTool} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
+              <button onClick={fullyDismissTool} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '18px', lineHeight: 1, padding: '4px 2px' }} aria-label="Dismiss">×</button>
             </div>
           </BannerWrap>
         )}
