@@ -163,6 +163,12 @@ export default function ScrollReminderPopup() {
     return () => { clearTimeout(toolPromptTimerRef.current); window.removeEventListener('scroll', onScroll) }
   }, [result])
 
+  /* ── Notify WhatsApp button when a banner is active ── */
+  useEffect(() => {
+    const bannerOn = minimized || toolPromptMinimized
+    window.dispatchEvent(new CustomEvent(bannerOn ? 'ensurio:banner-on' : 'ensurio:banner-off'))
+  }, [minimized, toolPromptMinimized])
+
   const dismissReminder    = () => { setVisible(false); setTimeout(() => setMinimized(true), 220) }
   const expandReminder     = () => { setMinimized(false); setVisible(true) }
   const fullyDismissRem    = (e) => { e.stopPropagation(); setMinimized(false) }

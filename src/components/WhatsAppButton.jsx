@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import botIcon from '../assets/bot.png'
 
@@ -6,12 +6,32 @@ const WA_NUMBER = '971509765976'
 const WA_MESSAGE = 'Hello! I found Ensurio First online and would like to learn more about your services.'
 const BOT_URL = 'https://wa.me/971509765976?text=I+want+to+chat+with+the+Ensurio+bot'
 
+const BANNER_HEIGHT = 56 // approx banner height in px
+
 export default function WhatsAppButton() {
   const [open, setOpen] = useState(false)
+  const [bannerUp, setBannerUp] = useState(false)
   const waHref = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(WA_MESSAGE)}`
 
+  useEffect(() => {
+    const on  = () => setBannerUp(true)
+    const off = () => setBannerUp(false)
+    window.addEventListener('ensurio:banner-on', on)
+    window.addEventListener('ensurio:banner-off', off)
+    return () => {
+      window.removeEventListener('ensurio:banner-on', on)
+      window.removeEventListener('ensurio:banner-off', off)
+    }
+  }, [])
+
+  const bottomOffset = bannerUp ? 28 + BANNER_HEIGHT + 10 : 28
+
   return (
-    <div style={{ position: 'fixed', bottom: '28px', right: '28px', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
+    <motion.div
+      animate={{ bottom: bottomOffset }}
+      transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+      style={{ position: 'fixed', bottom: bottomOffset, right: '28px', zIndex: 9999, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}
+    >
 
       {/* Popup options */}
       <AnimatePresence>
@@ -103,6 +123,6 @@ export default function WhatsAppButton() {
         </AnimatePresence>
       </motion.button>
 
-    </div>
+    </motion.div>
   )
 }
