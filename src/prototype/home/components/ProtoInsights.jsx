@@ -1,19 +1,25 @@
 import { motion } from 'framer-motion'
 import { Clock } from 'lucide-react'
 import { insights } from '../data/index.js'
+import blogDubai    from '../../../assets/blog-dubai.jpg'
+import blogSigning  from '../../../assets/blog-signing.jpg'
+import blogBusiness from '../../../assets/blog-business.jpg'
+
+const blogImages = [blogDubai, blogSigning, blogBusiness]
 
 export default function ProtoInsights() {
   return (
     <section id="insights" style={{ background: 'var(--light-bg)', padding: '5rem 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem' }}>
+
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
           <div>
-            <div style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.75rem' }}>
+            <p style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.5rem' }}>
               Latest Insights
-            </div>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.02em' }}>
-              Latest Insights
+            </p>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.02em', margin: 0 }}>
+              From Our Blog
             </h2>
           </div>
           <a href="#" style={{ fontFamily: 'var(--font-body)', fontSize: '13px', fontWeight: 600, color: 'var(--teal)', textDecoration: 'none', whiteSpace: 'nowrap' }}>
@@ -30,40 +36,54 @@ export default function ProtoInsights() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              whileHover={{ background: 'var(--teal-pale)' }}
-              style={{ background: 'var(--white)', padding: '1.75rem', borderRadius: 0, display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+              style={{ background: 'var(--white)', display: 'flex', flexDirection: 'column', cursor: 'pointer', overflow: 'hidden' }}
+              onMouseEnter={e => e.currentTarget.querySelector('img').style.transform = 'scale(1.04)'}
+              onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
             >
-              {/* Tag badge */}
-              <div style={{ display: 'inline-block', alignSelf: 'flex-start', background: 'var(--teal-pale)', color: 'var(--teal-dark)', padding: '4px 10px', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', fontFamily: 'var(--font-body)', letterSpacing: '0.08em', marginBottom: '1rem', borderRadius: 0 }}>
-                {article.tag}
+              {/* Image */}
+              <div style={{ overflow: 'hidden', height: '200px', flexShrink: 0 }}>
+                <img
+                  src={blogImages[i]}
+                  alt={article.title}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block', transition: 'transform 0.4s ease' }}
+                />
               </div>
 
-              {/* Title */}
-              <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '0.75rem', lineHeight: 1.4, flex: 1 }}>
-                {article.title}
-              </h3>
-
-              {/* Excerpt */}
-              <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
-                {article.excerpt}
-              </p>
-
-              {/* Bottom: date + read time + link */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--text-muted)' }}>{article.date}</span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    <Clock size={11} color="var(--text-muted)" />
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--text-muted)' }}>{article.readTime}</span>
-                  </div>
+              {/* Content */}
+              <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flex: 1, borderTop: '3px solid var(--teal)' }}>
+                {/* Tag */}
+                <div style={{ display: 'inline-block', alignSelf: 'flex-start', background: 'var(--teal-pale)', color: 'var(--teal-dark)', padding: '4px 10px', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', fontFamily: 'var(--font-body)', letterSpacing: '0.08em', marginBottom: '0.875rem' }}>
+                  {article.tag}
                 </div>
-                <a href="#" style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, color: 'var(--teal)', textDecoration: 'none' }}>
-                  Read More →
-                </a>
+
+                {/* Title */}
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '0.6rem', lineHeight: 1.4, flex: 1 }}>
+                  {article.title}
+                </h3>
+
+                {/* Excerpt */}
+                <p style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
+                  {article.excerpt}
+                </p>
+
+                {/* Footer */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--text-muted)' }}>{article.date}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Clock size={11} color="var(--text-muted)" />
+                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--text-muted)' }}>{article.readTime}</span>
+                    </div>
+                  </div>
+                  <a href="#" style={{ fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, color: 'var(--teal)', textDecoration: 'none' }}>
+                    Read More →
+                  </a>
+                </div>
               </div>
             </motion.article>
           ))}
         </div>
+
       </div>
     </section>
   )
