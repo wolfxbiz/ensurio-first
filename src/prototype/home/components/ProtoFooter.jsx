@@ -79,10 +79,21 @@ export default function ProtoFooter() {
         </div>
       </div>
 
+      {/* License bar */}
+      <div style={{
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        padding: isMobile ? '0.875rem 0.75rem' : '0.875rem 4rem',
+        textAlign: 'center',
+      }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.4)', margin: 0 }}>
+          www.insurefirst.ae is powered by Fredrick Insurance Consultant licensed by CBUAE — LICENSE 143
+        </p>
+      </div>
+
       {/* Bottom bar */}
       <div style={{
-        borderTop: '1px solid rgba(255,255,255,0.1)',
-        padding: isMobile ? '1.25rem 0.75rem' : '1.25rem 4rem',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        padding: isMobile ? '1rem 0.75rem' : '1.25rem 4rem',
         display: 'flex',
         flexDirection: isMobile ? 'column' : 'row',
         justifyContent: 'space-between',
@@ -90,10 +101,10 @@ export default function ProtoFooter() {
         textAlign: isMobile ? 'center' : 'left',
         gap: '0.5rem',
       }}>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.45)' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
           © {new Date().getFullYear()} Insure First. All rights reserved.
         </p>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.45)' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
           CBUAE Licensed · License 143
         </p>
       </div>
