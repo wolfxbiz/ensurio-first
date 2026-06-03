@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { industries } from '../data/index.js'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 import constructionImg from '../../../assets/industry-construction.jpg'
 import manufacturingImg from '../../../assets/industry-manufacturing.jpg'
@@ -18,9 +19,11 @@ const imageMap = {
 }
 
 export default function ProtoIndustries() {
+  const isMobile = useIsMobile()
+
   return (
-    <section style={{ background: 'var(--white)', padding: '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem' }}>
+    <section style={{ background: 'var(--white)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
 
         {/* Header */}
         <div style={{ marginBottom: '3rem' }}>
@@ -38,7 +41,7 @@ export default function ProtoIndustries() {
         </div>
 
         {/* Photo cards grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
           {industries.map((industry, i) => {
             const img = imageMap[industry.name]
             return (
@@ -53,7 +56,7 @@ export default function ProtoIndustries() {
                 onMouseLeave={e => { e.currentTarget.querySelector('img').style.transform = 'scale(1)' }}
               >
                 {/* Photo */}
-                <div style={{ overflow: 'hidden', height: '200px' }}>
+                <div style={{ overflow: 'hidden', height: isMobile ? '160px' : '200px' }}>
                   <img
                     src={img}
                     alt={industry.name}

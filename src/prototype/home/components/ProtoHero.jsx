@@ -1,9 +1,12 @@
 import { CheckCircle2, ArrowRight } from 'lucide-react'
 import heroImg from '../../../assets/hero-handshake.jpg'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 export default function ProtoHero() {
+  const isMobile = useIsMobile()
+
   return (
-    <section style={{ position: 'relative', width: '100%', overflow: 'hidden', minHeight: '680px' }}>
+    <section style={{ position: 'relative', width: '100%', overflow: 'hidden', minHeight: isMobile ? '500px' : '680px' }}>
 
       {/* Full-width background image */}
       <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
@@ -19,19 +22,19 @@ export default function ProtoHero() {
         position: 'relative',
         maxWidth: '1280px',
         margin: '0 auto',
-        padding: '5rem 4rem',
+        padding: isMobile ? '2rem 1.5rem' : '5rem 4rem',
         display: 'flex',
         alignItems: 'center',
-        minHeight: '680px',
+        minHeight: isMobile ? '500px' : '680px',
       }}>
 
         {/* Content card — sharp corners, no border-radius */}
         <div style={{
           width: '100%',
-          maxWidth: '520px',
+          maxWidth: isMobile ? '100%' : '520px',
           background: 'var(--white)',
           boxShadow: '0 32px 80px rgba(12,31,79,0.22)',
-          padding: '2.75rem',
+          padding: isMobile ? '1.75rem' : '2.75rem',
           borderTop: '4px solid var(--teal)',
         }}>
 
@@ -50,13 +53,13 @@ export default function ProtoHero() {
           {/* Headline */}
           <h1 style={{
             fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)',
+            fontSize: isMobile ? '1.75rem' : 'clamp(1.8rem, 3.5vw, 2.75rem)',
             fontWeight: 800, lineHeight: 1.12,
             color: 'var(--navy)',
             letterSpacing: '-0.025em',
             marginBottom: '1rem',
           }}>
-            Insurance Consultancy That<br />
+            Insurance Consultancy That{isMobile ? ' ' : <br />}
             <span style={{ color: 'var(--teal)' }}>Protects Your Business.</span>
           </h1>
 

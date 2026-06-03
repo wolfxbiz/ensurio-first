@@ -11,16 +11,15 @@ import PrototypeHome from './prototype/home/index.jsx'
 
 export default function App() {
   const location = useLocation()
-  const isPrototype = location.pathname.startsWith('/prototype')
+  const isPrototype = location.pathname === '/' || location.pathname.startsWith('/prototype')
 
   return (
     <>
       {!isPrototype && <Navbar />}
       <Routes>
-        <Route path="/" element={<Navigate to="/prototype/home" replace />} />
+        <Route path="/" element={<PrototypeHome />} />
         <Route path="/risk-management" element={<RiskManagementPage />} />
         <Route path="/management-consultancy" element={<ManagementConsultancyPage />} />
-        <Route path="/prototype/home" element={<PrototypeHome />} />
       </Routes>
       {!isPrototype && <Footer />}
       {!isPrototype && <WhatsAppButton />}

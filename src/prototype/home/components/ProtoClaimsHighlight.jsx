@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import claimsImg from '../../../assets/claims-advisory.jpg'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 const claimsStats = [
   { value: '98%', label: 'Claim success rate' },
@@ -8,6 +9,8 @@ const claimsStats = [
 ]
 
 export default function ProtoClaimsHighlight() {
+  const isMobile = useIsMobile()
+
   return (
     <section id="claims" style={{ position: 'relative', overflow: 'hidden', borderTop: '3px solid var(--teal)' }}>
 
@@ -22,7 +25,7 @@ export default function ProtoClaimsHighlight() {
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,31,79,0.82)' }} />
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px', margin: '0 auto', textAlign: 'center', padding: '5rem 4rem' }}>
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px', margin: '0 auto', textAlign: 'center', padding: isMobile ? '3rem 1.5rem' : '5rem 4rem' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
 
           <div style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '1rem' }}>
@@ -30,7 +33,7 @@ export default function ProtoClaimsHighlight() {
           </div>
 
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--white)', letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
-            When Claims Become Complicated,<br />We Stand Beside You
+            When Claims Become Complicated,{isMobile ? ' ' : <br />}We Stand Beside You
           </h2>
 
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'rgba(255,255,255,0.75)', lineHeight: 1.8, maxWidth: '600px', margin: '0 auto 2rem' }}>
@@ -38,11 +41,11 @@ export default function ProtoClaimsHighlight() {
           </p>
 
           {/* Stats */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2.5rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: isMobile ? '1.75rem' : '2.5rem', flexWrap: 'wrap', gap: isMobile ? '0' : '0' }}>
             {claimsStats.map((stat, i) => (
               <div key={stat.label} style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ textAlign: 'center', padding: '0 2rem' }}>
-                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 800, color: 'var(--teal)' }}>{stat.value}</div>
+                <div style={{ textAlign: 'center', padding: isMobile ? '0 1rem' : '0 2rem' }}>
+                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.5rem' : '2rem', fontWeight: 800, color: 'var(--teal)' }}>{stat.value}</div>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{stat.label}</div>
                 </div>
                 {i < claimsStats.length - 1 && (

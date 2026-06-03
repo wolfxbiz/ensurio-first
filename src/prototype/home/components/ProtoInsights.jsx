@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Clock } from 'lucide-react'
 import { insights } from '../data/index.js'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 import blogDubai    from '../../../assets/blog-dubai.jpg'
 import blogSigning  from '../../../assets/blog-signing.jpg'
 import blogBusiness from '../../../assets/blog-business.jpg'
@@ -8,9 +9,11 @@ import blogBusiness from '../../../assets/blog-business.jpg'
 const blogImages = [blogDubai, blogSigning, blogBusiness]
 
 export default function ProtoInsights() {
+  const isMobile = useIsMobile()
+
   return (
-    <section id="insights" style={{ background: 'var(--light-bg)', padding: '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem' }}>
+    <section id="insights" style={{ background: 'var(--light-bg)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -28,7 +31,7 @@ export default function ProtoInsights() {
         </div>
 
         {/* Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
           {insights.map((article, i) => (
             <motion.article
               key={article.title}
@@ -41,7 +44,7 @@ export default function ProtoInsights() {
               onMouseLeave={e => e.currentTarget.querySelector('img').style.transform = 'scale(1)'}
             >
               {/* Image */}
-              <div style={{ overflow: 'hidden', height: '200px', flexShrink: 0 }}>
+              <div style={{ overflow: 'hidden', height: isMobile ? '180px' : '200px', flexShrink: 0 }}>
                 <img
                   src={blogImages[i]}
                   alt={article.title}

@@ -2,14 +2,17 @@ import { motion } from 'framer-motion'
 import { ShieldQuestion, TrendingDown, XCircle, FileQuestion, Scale, ClipboardCheck, Search, FileText, Headphones, Gavel, BarChart3 } from 'lucide-react'
 import { problems, solutions } from '../data/index.js'
 import problemsImg from '../../../assets/advisor-documents-banner.jpg'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 const solutionIcons = { ClipboardCheck, Search, FileText, Headphones, Gavel, BarChart3 }
 const problemIcons  = { ShieldQuestion, TrendingDown, XCircle, FileQuestion, Scale }
 
 export default function ProtoProblems() {
+  const isMobile = useIsMobile()
+
   return (
-    <section id="solutions" style={{ background: 'var(--light-bg)', padding: '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem' }}>
+    <section id="solutions" style={{ background: 'var(--light-bg)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
 
         {/* Section header */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
@@ -36,7 +39,7 @@ export default function ProtoProblems() {
         </div>
 
         {/* Two-column layout below image */}
-        <div style={{ display: 'grid', gridTemplateColumns: '5fr 7fr', gap: '1px', background: 'var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 7fr', gap: '1px', background: 'var(--border)' }}>
 
           {/* LEFT — Pain Points (navy) */}
           <div style={{ background: 'var(--navy)' }}>
@@ -60,7 +63,7 @@ export default function ProtoProblems() {
                   transition={{ delay: i * 0.07, duration: 0.35 }}
                   style={{
                     display: 'flex', gap: '1rem', alignItems: 'flex-start',
-                    padding: '1.1rem 2rem',
+                    padding: isMobile ? '0.875rem 1.5rem' : '1.1rem 2rem',
                     borderBottom: i < problems.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
                   }}
                 >
@@ -80,11 +83,11 @@ export default function ProtoProblems() {
             })}
           </div>
 
-          {/* RIGHT — Solutions (white 3×2 grid) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)', alignContent: 'stretch' }}>
+          {/* RIGHT — Solutions (white grid) */}
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)', alignContent: 'stretch' }}>
 
-            {/* Header row spanning 3 cols */}
-            <div style={{ gridColumn: 'span 3', background: 'var(--white)', padding: '1.5rem 2rem 1rem', borderBottom: '1px solid var(--border)' }}>
+            {/* Header row spanning all cols */}
+            <div style={{ gridColumn: isMobile ? 'span 2' : 'span 3', background: 'var(--white)', padding: '1.5rem 2rem 1rem', borderBottom: '1px solid var(--border)' }}>
               <p style={{ fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', margin: 0 }}>
                 How We Help
               </p>

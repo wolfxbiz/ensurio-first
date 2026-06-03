@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 const credentials = [
   'ACII — Chartered Insurance Institute',
@@ -11,16 +12,28 @@ const credentials = [
 const credentialBadges = ['ACII Qualified', 'CBUAE License 143', 'Insurance Technical & Legal Consultant']
 
 export default function ProtoFounder() {
+  const isMobile = useIsMobile()
+
   return (
-    <section id="founder" style={{ background: 'var(--white)', padding: '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
-          {/* Left: image placeholder */}
+    <section id="founder" style={{ background: 'var(--white)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '2rem' : '4rem', alignItems: 'center' }}>
+          {/* Image placeholder — order 0 on mobile (first) */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ background: 'var(--navy)', minHeight: '400px', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: 0 }}
+            style={{
+              background: 'var(--navy)',
+              minHeight: isMobile ? '280px' : '400px',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 0,
+              order: isMobile ? 0 : 0,
+            }}
           >
             {/* Initials */}
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '3rem', fontWeight: 800, color: 'var(--teal)', marginBottom: '0.5rem' }}>
@@ -43,12 +56,13 @@ export default function ProtoFounder() {
             </div>
           </motion.div>
 
-          {/* Right: content */}
+          {/* Content — order 1 on mobile (below image) */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
+            style={{ order: isMobile ? 1 : 1 }}
           >
             <div style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.75rem' }}>
               Our Founder

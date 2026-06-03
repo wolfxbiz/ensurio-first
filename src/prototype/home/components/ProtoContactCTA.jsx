@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 const contactItems = [
   { Icon: Mail, label: 'Email', value: 'info@insurefirst.ae' },
@@ -8,12 +9,22 @@ const contactItems = [
 ]
 
 export default function ProtoContactCTA() {
+  const isMobile = useIsMobile()
+
   return (
     <section
       id="contact"
-      style={{ background: 'var(--navy)', padding: '5rem 0', borderTop: '3px solid var(--teal)' }}
+      style={{ background: 'var(--navy)', padding: isMobile ? '3rem 0' : '5rem 0', borderTop: '3px solid var(--teal)' }}
     >
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+      <div style={{
+        maxWidth: '1280px',
+        margin: '0 auto',
+        padding: isMobile ? '0 1.5rem' : '0 4rem',
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+        gap: isMobile ? '2.5rem' : '4rem',
+        alignItems: 'center',
+      }}>
         {/* Left: copy */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

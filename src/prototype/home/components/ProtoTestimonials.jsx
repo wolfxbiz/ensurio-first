@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
 import { testimonials } from '../data/index.js'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 
 export default function ProtoTestimonials() {
+  const isMobile = useIsMobile()
+
   return (
-    <section style={{ background: 'var(--light-bg)', padding: '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem' }}>
+    <section style={{ background: 'var(--light-bg)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <div style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.75rem' }}>
@@ -17,7 +20,7 @@ export default function ProtoTestimonials() {
         </div>
 
         {/* Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)' }}>
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
