@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useIsMobile } from '../hooks/useIsMobile.js'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import logoImg from '../../../assets/logo.png'
@@ -46,20 +47,23 @@ export default function ProtoNav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [mobileExpanded, setMobileExpanded] = useState(null)
+  const isMobile = useIsMobile()
 
   return (
     <>
-      {/* ── Top bar ── */}
-      <div style={{ background: 'var(--white)', padding: '7px 0', fontSize: '12px', color: 'var(--text-muted)', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <span>www.insurefirst.ae is powered by Fredrick Insurance Consultant licensed by CBUAE — LICENSE 143</span>
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {['f', 'in', 'ig'].map((s) => (
-              <span key={s} style={{ width: '20px', height: '20px', background: 'var(--light-bg)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 700, cursor: 'pointer', color: 'var(--text-mid)' }}>{s}</span>
-            ))}
+      {/* ── Top bar — hidden on mobile ── */}
+      {!isMobile && (
+        <div style={{ background: 'var(--white)', padding: '7px 0', fontSize: '12px', color: 'var(--text-muted)', borderBottom: '1px solid var(--border)' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+            <span>www.insurefirst.ae is powered by Fredrick Insurance Consultant licensed by CBUAE — LICENSE 143</span>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              {['f', 'in', 'ig'].map((s) => (
+                <span key={s} style={{ width: '20px', height: '20px', background: 'var(--light-bg)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 700, cursor: 'pointer', color: 'var(--text-mid)' }}>{s}</span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ── Logo / contact bar ── */}
       <div style={{ background: 'var(--white)', borderBottom: '1px solid var(--border)', padding: '0' }}>

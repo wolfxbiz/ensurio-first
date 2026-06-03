@@ -22,7 +22,7 @@ export default function ProtoHero() {
         position: 'relative',
         maxWidth: '1280px',
         margin: '0 auto',
-        padding: isMobile ? '1.25rem 1rem' : '5rem 4rem',
+        padding: isMobile ? '0.75rem 0.5rem' : '5rem 4rem',
         display: 'flex',
         alignItems: 'center',
         minHeight: isMobile ? '500px' : '680px',
@@ -34,7 +34,7 @@ export default function ProtoHero() {
           maxWidth: isMobile ? '100%' : '520px',
           background: 'var(--white)',
           boxShadow: '0 32px 80px rgba(12,31,79,0.22)',
-          padding: isMobile ? '1.25rem' : '2.75rem',
+          padding: isMobile ? '1rem' : '2.75rem',
           borderTop: '4px solid var(--teal)',
         }}>
 

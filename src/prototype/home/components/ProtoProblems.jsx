@@ -12,21 +12,23 @@ export default function ProtoProblems() {
 
   return (
     <section id="solutions" style={{ background: 'var(--light-bg)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 0.75rem' : '0 4rem' }}>
 
         {/* Section header */}
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: isMobile ? '1.5rem' : '2.5rem' }}>
           <div>
             <p style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.5rem' }}>
               Challenges & Solutions
             </p>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.02em', margin: 0 }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.4rem' : 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.02em', margin: 0 }}>
               From Challenge to Clarity
             </h2>
           </div>
-          <p style={{ fontFamily: 'var(--font-body)', color: 'var(--text-muted)', maxWidth: '400px', fontSize: '14px', lineHeight: 1.7, margin: 0 }}>
-            We identify the risks your business faces and provide structured, independent solutions to resolve them.
-          </p>
+          {!isMobile && (
+            <p style={{ fontFamily: 'var(--font-body)', color: 'var(--text-muted)', maxWidth: '400px', fontSize: '14px', lineHeight: 1.7, margin: 0 }}>
+              We identify the risks your business faces and provide structured, independent solutions to resolve them.
+            </p>
+          )}
         </div>
 
         {/* Full-width image */}
@@ -43,7 +45,7 @@ export default function ProtoProblems() {
 
           {/* LEFT — Pain Points (navy) */}
           <div style={{ background: 'var(--navy)' }}>
-            <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <div style={{ padding: isMobile ? '1rem 1rem' : '1.5rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
               <p style={{ fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', margin: 0 }}>
                 Common Pain Points
               </p>
@@ -62,12 +64,12 @@ export default function ProtoProblems() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.07, duration: 0.35 }}
                   style={{
-                    display: 'flex', gap: '1rem', alignItems: 'flex-start',
-                    padding: isMobile ? '0.875rem 1.5rem' : '1.1rem 2rem',
+                    display: 'flex', gap: isMobile ? '0.75rem' : '1rem', alignItems: 'flex-start',
+                    padding: isMobile ? '0.75rem 1rem' : '1.1rem 2rem',
                     borderBottom: i < problems.length - 1 ? '1px solid rgba(255,255,255,0.07)' : 'none',
                   }}
                 >
-                  <div style={{ width: '34px', height: '34px', background: 'rgba(14,164,114,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
+                  <div style={{ width: isMobile ? '28px' : '34px', height: isMobile ? '28px' : '34px', background: 'rgba(14,164,114,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '1px' }}>
                     {Icon && <Icon size={16} color="var(--teal)" />}
                   </div>
                   <div>
@@ -87,7 +89,7 @@ export default function ProtoProblems() {
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)', alignContent: 'stretch' }}>
 
             {/* Header row spanning all cols */}
-            <div style={{ gridColumn: isMobile ? 'span 2' : 'span 3', background: 'var(--white)', padding: '1.5rem 2rem 1rem', borderBottom: '1px solid var(--border)' }}>
+            <div style={{ gridColumn: isMobile ? 'span 2' : 'span 3', background: 'var(--white)', padding: isMobile ? '1rem 1rem 0.75rem' : '1.5rem 2rem 1rem', borderBottom: '1px solid var(--border)' }}>
               <p style={{ fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', margin: 0 }}>
                 How We Help
               </p>
@@ -108,14 +110,14 @@ export default function ProtoProblems() {
                   whileHover={{ background: 'var(--teal-pale)' }}
                   style={{
                     background: 'var(--white)',
-                    padding: '1.5rem',
+                    padding: isMobile ? '1rem' : '1.5rem',
                     cursor: 'default',
                     borderTop: '3px solid var(--teal)',
                     display: 'flex',
                     flexDirection: 'column',
                   }}
                 >
-                  <div style={{ width: '36px', height: '36px', background: 'var(--teal-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.875rem', flexShrink: 0 }}>
+                  <div style={{ width: isMobile ? '28px' : '36px', height: isMobile ? '28px' : '36px', background: 'var(--teal-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.875rem', flexShrink: 0 }}>
                     {Icon && <Icon size={18} color="var(--teal)" />}
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 700, color: 'var(--navy)', marginBottom: '0.4rem' }}>

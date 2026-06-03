@@ -25,14 +25,14 @@ export default function ProtoClaimsHighlight() {
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,31,79,0.82)' }} />
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px', margin: '0 auto', textAlign: 'center', padding: isMobile ? '3rem 1.5rem' : '5rem 4rem' }}>
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '780px', margin: '0 auto', textAlign: 'center', padding: isMobile ? '2.5rem 1rem' : '5rem 4rem' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
 
           <div style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '1rem' }}>
             Claims Advisory
           </div>
 
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--white)', letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.4rem' : 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--white)', letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
             When Claims Become Complicated,{isMobile ? ' ' : <br />}We Stand Beside You
           </h2>
 
@@ -44,8 +44,8 @@ export default function ProtoClaimsHighlight() {
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: isMobile ? '1.75rem' : '2.5rem', flexWrap: 'wrap', gap: isMobile ? '0' : '0' }}>
             {claimsStats.map((stat, i) => (
               <div key={stat.label} style={{ display: 'flex', alignItems: 'center' }}>
-                <div style={{ textAlign: 'center', padding: isMobile ? '0 1rem' : '0 2rem' }}>
-                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.5rem' : '2rem', fontWeight: 800, color: 'var(--teal)' }}>{stat.value}</div>
+                <div style={{ textAlign: 'center', padding: isMobile ? '0 0.875rem' : '0 2rem' }}>
+                  <div style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.4rem' : '2rem', fontWeight: 800, color: 'var(--teal)' }}>{stat.value}</div>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'rgba(255,255,255,0.55)', marginTop: '2px' }}>{stat.label}</div>
                 </div>
                 {i < claimsStats.length - 1 && (
@@ -58,7 +58,7 @@ export default function ProtoClaimsHighlight() {
           {/* CTA */}
           <a
             href="#contact"
-            style={{ display: 'inline-block', padding: '13px 28px', background: 'var(--teal)', color: 'var(--white)', fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 700, textDecoration: 'none', letterSpacing: '0.02em', transition: 'background 0.2s' }}
+            style={{ display: isMobile ? 'block' : 'inline-block', width: isMobile ? '100%' : 'auto', padding: '13px 28px', background: 'var(--teal)', color: 'var(--white)', fontFamily: 'var(--font-body)', fontSize: '14px', fontWeight: 700, textDecoration: 'none', letterSpacing: '0.02em', transition: 'background 0.2s', boxSizing: 'border-box' }}
             onMouseEnter={e => e.currentTarget.style.background = 'var(--teal-dark)'}
             onMouseLeave={e => e.currentTarget.style.background = 'var(--teal)'}
           >

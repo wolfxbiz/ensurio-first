@@ -16,7 +16,7 @@ export default function ProtoFounder() {
 
   return (
     <section id="founder" style={{ background: 'var(--white)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 1.5rem' : '0 4rem' }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 0.75rem' : '0 4rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? '2rem' : '4rem', alignItems: 'center' }}>
           {/* Image placeholder — order 0 on mobile (first) */}
           <motion.div
@@ -62,36 +62,40 @@ export default function ProtoFounder() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            style={{ order: isMobile ? 1 : 1 }}
+            style={{ order: isMobile ? 1 : 1, padding: isMobile ? '1.5rem 0' : '0' }}
           >
             <div style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.75rem' }}>
               Our Founder
             </div>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.4rem' : 'clamp(1.6rem, 2.8vw, 2.2rem)', fontWeight: 800, color: 'var(--navy)', letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
               Fredrick Lobo
             </h2>
 
-            {/* Credential items */}
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem' }}>
-              {credentials.map((cred) => (
-                <li key={cred} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.6rem' }}>
-                  <span style={{ width: '6px', height: '6px', background: 'var(--teal)', flexShrink: 0, marginTop: '7px', borderRadius: 0, display: 'inline-block' }} />
-                  <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--text-dark)', lineHeight: 1.6 }}>{cred}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Credential items — hidden on mobile, show only badge tags */}
+            {!isMobile && (
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem' }}>
+                {credentials.map((cred) => (
+                  <li key={cred} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.6rem' }}>
+                    <span style={{ width: '6px', height: '6px', background: 'var(--teal)', flexShrink: 0, marginTop: '7px', borderRadius: 0, display: 'inline-block' }} />
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--text-dark)', lineHeight: 1.6 }}>{cred}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'var(--text-mid)', lineHeight: 1.8, marginBottom: '1rem' }}>
+            <p style={{ fontFamily: 'var(--font-body)', fontSize: isMobile ? '13px' : '15px', color: 'var(--text-mid)', lineHeight: 1.8, marginBottom: '1rem' }}>
               Fredrick Lobo founded Insure First with a single mission: to give UAE businesses access to truly independent insurance expertise. With over 25 years of experience across commercial, industrial, aviation, and specialist insurance markets, Fredrick has helped more than 130 businesses secure the right coverage, resolve complex claims, and reduce unnecessary insurance costs.
             </p>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'var(--text-mid)', lineHeight: 1.8, marginBottom: '1.75rem' }}>
-              As a CBUAE-licensed consultant and ACII-qualified professional, Fredrick operates independently of any insurer — meaning his advice is always in the client's best interest.
-            </p>
+            {!isMobile && (
+              <p style={{ fontFamily: 'var(--font-body)', fontSize: '15px', color: 'var(--text-mid)', lineHeight: 1.8, marginBottom: '1.75rem' }}>
+                As a CBUAE-licensed consultant and ACII-qualified professional, Fredrick operates independently of any insurer — meaning his advice is always in the client's best interest.
+              </p>
+            )}
 
             {/* Credential badge tags */}
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: isMobile ? '1rem' : '1.75rem' }}>
               {credentialBadges.map((badge) => (
-                <span key={badge} style={{ padding: '5px 12px', border: '1px solid var(--teal)', borderRadius: 0, fontFamily: 'var(--font-body)', fontSize: '12px', fontWeight: 600, color: 'var(--teal-dark)', background: 'var(--teal-pale)' }}>
+                <span key={badge} style={{ padding: isMobile ? '4px 8px' : '5px 12px', border: '1px solid var(--teal)', borderRadius: 0, fontFamily: 'var(--font-body)', fontSize: isMobile ? '11px' : '12px', fontWeight: 600, color: 'var(--teal-dark)', background: 'var(--teal-pale)' }}>
                   {badge}
                 </span>
               ))}
