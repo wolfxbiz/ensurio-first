@@ -67,11 +67,11 @@ export default function ProtoNav() {
 
       {/* ── Logo / contact bar ── */}
       <div style={{ background: 'var(--white)', borderBottom: '1px solid var(--border)', padding: '0' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '80px', gap: '2rem' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 0.75rem' : '0 4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '80px', gap: '2rem' }}>
 
           {/* Logo */}
           <a href="#" style={{ flexShrink: 0, textDecoration: 'none' }}>
-            <img src={logoImg} alt="Insure First" style={{ height: '72px', width: 'auto', display: 'block' }} />
+            <img src={logoImg} alt="Insure First" style={{ height: isMobile ? '48px' : '80px', width: 'auto', display: 'block' }} />
           </a>
 
           {/* Contact info — hidden on mobile */}
