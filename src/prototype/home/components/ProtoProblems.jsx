@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ShieldQuestion, TrendingDown, XCircle, FileQuestion, Scale, ClipboardCheck, Search, FileText, Headphones, Gavel, BarChart3 } from 'lucide-react'
 import { problems, solutions } from '../data/index.js'
-import problemsImg from '../../../assets/advisor-documents-opt.jpg'
+import problemsImg from '../../../assets/advisor-documents-banner.jpg'
 
 const solutionIcons = { ClipboardCheck, Search, FileText, Headphones, Gavel, BarChart3 }
 const problemIcons  = { ShieldQuestion, TrendingDown, XCircle, FileQuestion, Scale }
@@ -27,11 +27,11 @@ export default function ProtoProblems() {
         </div>
 
         {/* Full-width image */}
-        <div style={{ width: '100%', height: '340px', overflow: 'hidden', marginBottom: '1px' }}>
+        <div style={{ width: '100%', marginBottom: '1px' }}>
           <img
             src={problemsImg}
             alt="Insurance advisory meeting"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%', display: 'block' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           />
         </div>
 
@@ -81,7 +81,7 @@ export default function ProtoProblems() {
           </div>
 
           {/* RIGHT — Solutions (white 3×2 grid) */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)', alignContent: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'var(--border)', alignContent: 'stretch' }}>
 
             {/* Header row spanning 3 cols */}
             <div style={{ gridColumn: 'span 3', background: 'var(--white)', padding: '1.5rem 2rem 1rem', borderBottom: '1px solid var(--border)' }}>

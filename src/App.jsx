@@ -17,7 +17,7 @@ export default function App() {
     <>
       {!isPrototype && <Navbar />}
       <Routes>
-        <Route path="/" element={<Navigate to="/risk-management" replace />} />
+        <Route path="/" element={<Navigate to="/prototype/home" replace />} />
         <Route path="/risk-management" element={<RiskManagementPage />} />
         <Route path="/management-consultancy" element={<ManagementConsultancyPage />} />
         <Route path="/prototype/home" element={<PrototypeHome />} />

@@ -1,5 +1,5 @@
 import { CheckCircle2, ArrowRight } from 'lucide-react'
-import heroImg from '../../../assets/advisor-handshake-opt.jpg'
+import heroImg from '../../../assets/hero-handshake.jpg'
 
 export default function ProtoHero() {
   return (
@@ -10,7 +10,7 @@ export default function ProtoHero() {
         <img
           src={heroImg}
           alt="Insurance consultants with clients"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
         />
       </div>
 
