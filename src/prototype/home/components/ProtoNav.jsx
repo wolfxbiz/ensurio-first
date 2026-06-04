@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useIsMobile } from '../hooks/useIsMobile.js'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import logoImg from '../../../assets/logo.png'
+import logoImg from '../../../assets/insure-first-logo.svg'
 
 const NAV_LINKS = [
   { label: 'Home', href: '#' },
@@ -71,7 +71,7 @@ export default function ProtoNav() {
 
           {/* Logo */}
           <a href="#" style={{ flexShrink: 0, textDecoration: 'none' }}>
-            <img src={logoImg} alt="Insure First" style={{ height: isMobile ? '48px' : '80px', width: 'auto', display: 'block' }} />
+            <img src={logoImg} alt="Insure First" style={{ height: isMobile ? '32px' : '44px', width: 'auto', display: 'block' }} />
           </a>
 
           {/* Contact info — hidden on mobile */}

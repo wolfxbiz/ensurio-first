@@ -1,4 +1,4 @@
-import logoImg from '../../../assets/logo.png'
+import logoImg from '../../../assets/insure-first-logo.svg'
 import { useIsMobile } from '../hooks/useIsMobile.js'
 
 const footerLinks = {
@@ -40,7 +40,7 @@ export default function ProtoFooter() {
           {/* Logo + description column — spans 2 cols on mobile */}
           <div style={{ gridColumn: isMobile ? 'span 2' : 'span 1' }}>
             <div style={{ marginBottom: '1rem' }}>
-              <img src={logoImg} alt="Insure First" style={{ height: isMobile ? '30px' : '36px', width: 'auto', display: 'block' }} />
+              <img src={logoImg} alt="Insure First" style={{ height: isMobile ? '28px' : '40px', width: 'auto', display: 'block' }} />
             </div>
             {!isMobile && (
               <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, maxWidth: '260px' }}>
