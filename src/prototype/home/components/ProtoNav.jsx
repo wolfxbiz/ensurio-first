@@ -1,46 +1,48 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useIsMobile } from '../hooks/useIsMobile.js'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import logoImg from '../../../assets/insure-first-logo.svg'
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#' },
+  { label: 'Home', href: '/' },
   {
     label: 'Who We Help',
+    href: '/services#who-we-help',
     dropdown: [
-      'Business Owners',
-      'Finance Managers',
-      'Operations Managers',
-      'Individuals & Families',
+      { label: 'Business Owners', href: '/services#who-we-help' },
+      { label: 'Finance Managers', href: '/services#who-we-help' },
+      { label: 'Operations Managers', href: '/services#who-we-help' },
+      { label: 'Individuals & Families', href: '/services#who-we-help' },
     ],
   },
   {
     label: 'Solutions',
+    href: '/services#solutions',
     dropdown: [
-      'Insurance Audit',
-      'Risk Assessment',
-      'Policy Review',
-      'Claims Advisory',
-      'Legal Claims Support',
-      'Coverage Gap Analysis',
+      { label: 'Insurance Audit', href: '/services#solutions' },
+      { label: 'Risk Assessment', href: '/services#solutions' },
+      { label: 'Policy Review', href: '/services#solutions' },
+      { label: 'Claims Advisory', href: '/services#solutions' },
+      { label: 'Legal Claims Support', href: '/services#solutions' },
+      { label: 'Coverage Gap Analysis', href: '/services#solutions' },
     ],
   },
   {
     label: 'Insurance Services',
+    href: '/services#insurance-services',
     dropdown: [
-      'Commercial Insurance',
-      'Personal Insurance',
-      'Professional Liability',
-      'Engineering Insurance',
-      'Marine Insurance',
-      'Aviation Insurance',
+      { label: 'Business Insurance', href: '/services#insurance-services' },
+      { label: 'Specialist Insurance', href: '/services#insurance-services' },
+      { label: 'Professional Protection', href: '/services#insurance-services' },
+      { label: 'Personal Insurance', href: '/services#insurance-services' },
     ],
   },
-  { label: 'Claims Support', href: '#claims' },
-  { label: 'Insights', href: '#insights' },
-  { label: 'About', href: '#founder' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Claims Support', href: '/services#claims-support' },
+  { label: 'Insights', href: '/#insights' },
+  { label: 'About', href: '/#founder' },
+  { label: 'Contact Us', href: '/contact' },
 ]
 
 export default function ProtoNav() {
@@ -48,6 +50,7 @@ export default function ProtoNav() {
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [mobileExpanded, setMobileExpanded] = useState(null)
   const isMobile = useIsMobile()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -70,9 +73,9 @@ export default function ProtoNav() {
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 0.75rem' : '0 4rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '80px', gap: '2rem' }}>
 
           {/* Logo */}
-          <a href="#" style={{ flexShrink: 0, textDecoration: 'none' }}>
+          <Link to="/" style={{ flexShrink: 0, textDecoration: 'none' }}>
             <img src={logoImg} alt="Insure First" style={{ height: isMobile ? '32px' : '44px', width: 'auto', display: 'block' }} />
-          </a>
+          </Link>
 
           {/* Contact info — hidden on mobile */}
           <div style={{ display: 'flex', gap: '2.5rem', flexWrap: 'wrap' }} className="proto-contact-bar">
@@ -94,15 +97,15 @@ export default function ProtoNav() {
           </div>
 
           {/* CTA */}
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             style={{ flexShrink: 0, background: 'var(--teal)', color: 'var(--white)', padding: '12px 24px', fontSize: '13.5px', fontWeight: 700, textDecoration: 'none', fontFamily: 'var(--font-body)', letterSpacing: '0.01em', transition: 'background 0.2s', whiteSpace: 'nowrap' }}
             onMouseEnter={e => e.currentTarget.style.background = 'var(--teal-dark)'}
             onMouseLeave={e => e.currentTarget.style.background = 'var(--teal)'}
             className="proto-quote-btn"
           >
             Get A Quote
-          </a>
+          </Link>
 
           {/* Mobile hamburger */}
           <button
@@ -130,6 +133,7 @@ export default function ProtoNav() {
                 onMouseLeave={() => setActiveDropdown(null)}
               >
                 <button
+                  onClick={() => navigate(link.href)}
                   style={{
                     background: 'none', border: 'none', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', gap: '4px',
@@ -162,24 +166,25 @@ export default function ProtoNav() {
                       }}
                     >
                       {link.dropdown.map((item) => (
-                        <a
-                          key={item}
-                          href="#"
+                        <Link
+                          key={item.label}
+                          to={item.href}
+                          onClick={() => setActiveDropdown(null)}
                           style={{ display: 'block', padding: '10px 18px', fontSize: '13px', fontWeight: 500, color: 'var(--navy)', textDecoration: 'none', fontFamily: 'var(--font-body)', transition: 'all 0.12s', borderLeft: '3px solid transparent' }}
                           onMouseEnter={e => { e.currentTarget.style.color = 'var(--teal)'; e.currentTarget.style.borderLeftColor = 'var(--teal)'; e.currentTarget.style.background = 'var(--teal-pale)' }}
                           onMouseLeave={e => { e.currentTarget.style.color = 'var(--navy)'; e.currentTarget.style.borderLeftColor = 'transparent'; e.currentTarget.style.background = 'transparent' }}
                         >
-                          {item}
-                        </a>
+                          {item.label}
+                        </Link>
                       ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             ) : (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
+                to={link.href}
                 style={{
                   display: 'flex', alignItems: 'center', height: '100%',
                   padding: '0 14px', fontSize: '13.5px', fontWeight: 600,
@@ -191,7 +196,7 @@ export default function ProtoNav() {
                 onMouseLeave={e => { e.currentTarget.style.color = 'var(--navy)'; e.currentTarget.style.borderBottomColor = 'transparent' }}
               >
                 {link.label}
-              </a>
+              </Link>
             )
           )}
         </div>
@@ -222,27 +227,27 @@ export default function ProtoNav() {
                         {mobileExpanded === link.label && (
                           <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} style={{ overflow: 'hidden' }}>
                             {link.dropdown.map((item) => (
-                              <a key={item} href="#" style={{ display: 'block', padding: '10px 16px', fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', borderBottom: '1px solid var(--border)', fontFamily: 'var(--font-body)' }}
+                              <Link key={item.label} to={item.href} style={{ display: 'block', padding: '10px 16px', fontSize: '13px', color: 'var(--text-muted)', textDecoration: 'none', borderBottom: '1px solid var(--border)', fontFamily: 'var(--font-body)' }}
                                 onClick={() => setMenuOpen(false)}
                               >
-                                {item}
-                              </a>
+                                {item.label}
+                              </Link>
                             ))}
                           </motion.div>
                         )}
                       </AnimatePresence>
                     </div>
                   ) : (
-                    <a key={link.label} href={link.href} style={{ display: 'block', padding: '12px 0', fontSize: '14px', fontWeight: 600, color: 'var(--navy)', textDecoration: 'none', borderBottom: '1px solid var(--border)', fontFamily: 'var(--font-body)' }}
+                    <Link key={link.label} to={link.href} style={{ display: 'block', padding: '12px 0', fontSize: '14px', fontWeight: 600, color: 'var(--navy)', textDecoration: 'none', borderBottom: '1px solid var(--border)', fontFamily: 'var(--font-body)' }}
                       onClick={() => setMenuOpen(false)}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   )
                 )}
-                <a href="#contact" onClick={() => setMenuOpen(false)} style={{ display: 'block', marginTop: '1rem', background: 'var(--teal)', color: 'var(--white)', padding: '13px', fontSize: '14px', fontWeight: 700, textDecoration: 'none', textAlign: 'center', fontFamily: 'var(--font-body)' }}>
+                <Link to="/contact" onClick={() => setMenuOpen(false)} style={{ display: 'block', marginTop: '1rem', background: 'var(--teal)', color: 'var(--white)', padding: '13px', fontSize: '14px', fontWeight: 700, textDecoration: 'none', textAlign: 'center', fontFamily: 'var(--font-body)' }}>
                   Get A Quote
-                </a>
+                </Link>
               </div>
             </motion.div>
           )}
