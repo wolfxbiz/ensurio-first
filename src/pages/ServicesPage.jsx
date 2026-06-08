@@ -183,8 +183,7 @@ function PageHero({ isMobile }) {
         aria-hidden="true"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }}
       />
-      {/* navy overlay — light enough to show the cityscape */}
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(105deg, rgba(13,27,75,0.82) 0%, rgba(13,27,75,0.60) 60%, rgba(13,27,75,0.45) 100%)' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.65)' }} />
       {/* subtle grid on top */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(14,164,114,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(14,164,114,0.04) 1px,transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
 
@@ -256,7 +255,6 @@ function WhoWeHelp({ isMobile }) {
                     loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
                   />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 70%, rgba(255,255,255,0.35) 100%)' }} />
                 </div>
 
                 {/* card body */}
@@ -327,7 +325,6 @@ function Solutions({ isMobile }) {
                     loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                   />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 55%, rgba(13,27,75,0.18) 100%)' }} />
                   {sol.tag && (
                     <span style={{ position: 'absolute', top: '12px', right: '12px', fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 700, color: 'var(--white)', background: 'var(--teal)', padding: '3px 10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{sol.tag}</span>
                   )}
@@ -397,7 +394,7 @@ function InsuranceServices({ isMobile }) {
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(13,27,75,0.20) 0%, rgba(13,27,75,0.62) 100%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.42)' }} />
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: '1rem 1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <div style={{ width: '5px', height: '28px', background: 'var(--teal)', flexShrink: 0 }} />
