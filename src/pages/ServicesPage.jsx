@@ -183,8 +183,8 @@ function PageHero({ isMobile }) {
         aria-hidden="true"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }}
       />
-      {/* navy overlay */}
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.88)' }} />
+      {/* navy overlay — light enough to show the cityscape */}
+      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(105deg, rgba(13,27,75,0.82) 0%, rgba(13,27,75,0.60) 60%, rgba(13,27,75,0.45) 100%)' }} />
       {/* subtle grid on top */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(14,164,114,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(14,164,114,0.04) 1px,transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
 
@@ -248,15 +248,15 @@ function WhoWeHelp({ isMobile }) {
                 transition={{ delay: i * 0.08 }}
                 style={{ background: 'var(--white)', overflow: 'hidden', borderTop: '3px solid var(--teal)', display: 'flex', flexDirection: 'column' }}
               >
-                {/* card image */}
-                <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
+                {/* card image — no text on image so minimal overlay */}
+                <div style={{ height: '240px', overflow: 'hidden', position: 'relative' }}>
                   <img
                     src={client.img}
                     alt={client.title}
                     loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
                   />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 40%, rgba(13,27,75,0.55) 100%)' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 70%, rgba(255,255,255,0.35) 100%)' }} />
                 </div>
 
                 {/* card body */}
@@ -319,15 +319,15 @@ function Solutions({ isMobile }) {
                 transition={{ delay: i * 0.07 }}
                 style={{ background: 'var(--white)', display: 'flex', flexDirection: 'column', overflow: 'hidden', borderTop: '3px solid var(--teal)' }}
               >
-                {/* card image */}
-                <div style={{ height: '160px', overflow: 'hidden', position: 'relative' }}>
+                {/* card image — tag has own background so minimal overlay needed */}
+                <div style={{ height: '185px', overflow: 'hidden', position: 'relative' }}>
                   <img
                     src={sol.img}
                     alt={sol.title}
                     loading="lazy"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                   />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 30%, rgba(13,27,75,0.5) 100%)' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 55%, rgba(13,27,75,0.18) 100%)' }} />
                   {sol.tag && (
                     <span style={{ position: 'absolute', top: '12px', right: '12px', fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 700, color: 'var(--white)', background: 'var(--teal)', padding: '3px 10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{sol.tag}</span>
                   )}
@@ -389,19 +389,19 @@ function InsuranceServices({ isMobile }) {
               transition={{ delay: i * 0.08 }}
               style={{ background: 'var(--white)', overflow: 'hidden' }}
             >
-              {/* category banner image */}
-              <div style={{ height: '150px', overflow: 'hidden', position: 'relative' }}>
+              {/* category banner image — title overlay needs contrast but image must show */}
+              <div style={{ height: '170px', overflow: 'hidden', position: 'relative' }}>
                 <img
                   src={cat.img}
                   alt={cat.title}
                   loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.62)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(13,27,75,0.20) 0%, rgba(13,27,75,0.62) 100%)' }} />
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: '1rem 1.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <div style={{ width: '5px', height: '28px', background: 'var(--teal)', flexShrink: 0 }} />
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--white)', margin: 0 }}>{cat.title}</h3>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--white)', margin: 0, textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>{cat.title}</h3>
                   </div>
                 </div>
               </div>
@@ -478,7 +478,7 @@ function ClaimsSupport({ isMobile }) {
           {/* Right: image + stats */}
           <div style={{ position: 'relative', overflow: 'hidden', minHeight: isMobile ? '260px' : 'auto' }}>
             <img src={imgClaims} alt="Claims advisory" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,31,79,0.78)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,31,79,0.62)' }} />
             <div style={{ position: 'relative', zIndex: 1, padding: isMobile ? '2rem 1.5rem' : '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(255,255,255,0.1)' }}>
                 {[{ value: '98%', label: 'Claim success rate' }, { value: '25+', label: 'Years advocacy' }, { value: '24/7', label: 'Support available' }].map((stat) => (
@@ -523,7 +523,7 @@ function ServicesCTA({ isMobile }) {
         aria-hidden="true"
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
       />
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.92)' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.84)' }} />
 
       <div style={{ position: 'relative', zIndex: 1, maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '3rem 0.75rem' : '5rem 4rem', textAlign: isMobile ? 'left' : 'center' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
