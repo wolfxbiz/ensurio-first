@@ -8,8 +8,25 @@ import {
 import ProtoNav from '../prototype/home/components/ProtoNav'
 import ProtoFooter from '../prototype/home/components/ProtoFooter'
 import { useIsMobile } from '../prototype/home/hooks/useIsMobile'
-import claimsImg from '../assets/claims-advisory.jpg'
 import '../prototype/prototype.css'
+
+/* ─── Image imports ─── */
+import heroBanner       from '../assets/services/hero-banner.webp'
+import imgBizOwners     from '../assets/services/business-owners.webp'
+import imgFinance       from '../assets/services/finance-managers.webp'
+import imgOps           from '../assets/services/operations-managers.webp'
+import imgFamilies      from '../assets/services/individuals-families.webp'
+import imgAudit         from '../assets/services/insurance-audit.webp'
+import imgRisk          from '../assets/services/risk-assesment.webp'
+import imgPolicy        from '../assets/services/policy-review.webp'
+import imgClaims        from '../assets/services/claims-advisory.webp'
+import imgLegal         from '../assets/services/legal-claims-supposrt.webp'
+import imgGap           from '../assets/services/coverage-gap-analysis.webp'
+import imgBizIns        from '../assets/services/business-insurance.webp'
+import imgSpecialist    from '../assets/services/specilalist-insurance.webp'
+import imgProfessional  from '../assets/services/professional-protection.webp'
+import imgPersonal      from '../assets/services/personal-insurance.webp'
+import imgTrust         from '../assets/services/trust.webp'
 
 /* ─── Data ─── */
 
@@ -18,6 +35,7 @@ const whoWeHelp = [
     icon: Building2,
     title: 'Business Owners',
     subtitle: 'SMEs · Corporates · Startups',
+    img: imgBizOwners,
     desc: 'Whether you run a trading company, a service firm, or a multi-site operation, we audit your entire insurance programme and close the gaps that could destroy years of work in a single incident.',
     points: ['Full policy gap analysis', 'Premium benchmarking', 'Renewal strategy & negotiation', 'Claims history review'],
   },
@@ -25,6 +43,7 @@ const whoWeHelp = [
     icon: BarChart3,
     title: 'Finance Managers',
     subtitle: 'CFOs · Finance Directors · Controllers',
+    img: imgFinance,
     desc: 'Insurance is often the largest hidden cost on the balance sheet. We help finance teams understand exactly what they are paying for, cut waste, and ensure compliance with lender and board requirements.',
     points: ['TCOR (Total Cost of Risk) analysis', 'Budget forecasting & benchmarking', 'Lender insurance compliance', 'Board-level risk reporting'],
   },
@@ -32,6 +51,7 @@ const whoWeHelp = [
     icon: Users,
     title: 'Operations Managers',
     subtitle: 'COOs · Project Managers · Safety Officers',
+    img: imgOps,
     desc: 'Operational risk is physical and contractual. We ensure your insurance aligns with your contracts, subcontractor requirements, and day-to-day exposures across every site and location.',
     points: ['Contract insurance compliance', 'Subcontractor risk transfer', 'Site and project coverage review', 'Business interruption planning'],
   },
@@ -39,6 +59,7 @@ const whoWeHelp = [
     icon: Heart,
     title: 'Individuals & Families',
     subtitle: 'Residents · Expats · HNW Individuals',
+    img: imgFamilies,
     desc: 'From life and health to home and personal assets, we help individuals in the UAE understand their personal insurance needs and ensure they are adequately protected at every stage of life.',
     points: ['Life & health insurance review', 'Home & contents coverage', 'Personal accident protection', 'Expat insurance advisory'],
   },
@@ -49,6 +70,7 @@ const solutions = [
     icon: ClipboardCheck,
     title: 'Insurance Audit',
     tag: 'Most Requested',
+    img: imgAudit,
     desc: 'A comprehensive review of every policy you hold — identifying gaps, overlaps, under-insurance, and premium inefficiencies that most brokers miss at renewal.',
     process: ['Collect all current policy documents', 'Map coverage against your actual risk profile', 'Identify gaps, duplications & overpayments', 'Deliver a prioritised action report'],
   },
@@ -56,6 +78,7 @@ const solutions = [
     icon: Search,
     title: 'Risk Assessment',
     tag: '',
+    img: imgRisk,
     desc: 'Structured evaluation of your business risks — operational, contractual, financial, and reputational — to ensure the right coverage is in place before a loss event occurs.',
     process: ['On-site / remote risk survey', 'Hazard and exposure mapping', 'Coverage adequacy assessment', 'Risk improvement recommendations'],
   },
@@ -63,6 +86,7 @@ const solutions = [
     icon: FileText,
     title: 'Policy Review',
     tag: '',
+    img: imgPolicy,
     desc: 'Line-by-line analysis of policy wording, conditions, exclusions, and endorsements in plain language — so you know exactly what is covered and what is not before you need to make a claim.',
     process: ['Policy wording examination', 'Exclusion clause analysis', 'Endorsement adequacy check', 'Plain-language summary report'],
   },
@@ -70,6 +94,7 @@ const solutions = [
     icon: Headphones,
     title: 'Claims Advisory',
     tag: 'High Demand',
+    img: imgClaims,
     desc: 'Expert guidance through every stage of the claims process — from first notification through to final settlement — to maximise your outcome as an independent advocate.',
     process: ['Claims strategy & documentation', 'Insurer liaison & negotiation', 'Loss adjuster engagement', 'Settlement maximisation support'],
   },
@@ -77,6 +102,7 @@ const solutions = [
     icon: Gavel,
     title: 'Legal Claims Support',
     tag: '',
+    img: imgLegal,
     desc: 'Independent legal advisory for disputed, complex, or rejected insurance claims. We represent your interests when the insurer pushes back.',
     process: ['Claim dispute analysis', 'Policy interpretation & legal grounds', 'Formal dispute correspondence', 'Escalation & litigation support'],
   },
@@ -84,6 +110,7 @@ const solutions = [
     icon: BarChart3,
     title: 'Coverage Gap Analysis',
     tag: '',
+    img: imgGap,
     desc: 'Identify uninsured or under-insured exposures before they become liabilities. A forward-looking analysis to protect what your existing policies leave uncovered.',
     process: ['Asset and liability mapping', 'Cross-reference against held policies', 'Gap prioritisation by severity', 'Coverage solution recommendations'],
   },
@@ -92,6 +119,7 @@ const solutions = [
 const insuranceCategories = [
   {
     title: 'Business Insurance',
+    img: imgBizIns,
     color: 'var(--navy)',
     items: [
       { name: 'Commercial Property', desc: 'Buildings, contents, and assets against fire, theft, and natural perils.' },
@@ -103,6 +131,7 @@ const insuranceCategories = [
   },
   {
     title: 'Specialist Insurance',
+    img: imgSpecialist,
     color: 'var(--teal)',
     items: [
       { name: 'Marine Cargo & Hull', desc: 'Import, export, and transit cargo plus vessel hull coverage.' },
@@ -113,6 +142,7 @@ const insuranceCategories = [
   },
   {
     title: 'Professional Protection',
+    img: imgProfessional,
     color: 'var(--navy)',
     items: [
       { name: 'Professional Indemnity', desc: 'Errors, omissions, and negligent advice claims for service firms.' },
@@ -123,6 +153,7 @@ const insuranceCategories = [
   },
   {
     title: 'Personal Insurance',
+    img: imgPersonal,
     color: 'var(--teal)',
     items: [
       { name: 'Life & Critical Illness', desc: 'Financial security for family and dependants.' },
@@ -144,10 +175,20 @@ const claimsSteps = [
 
 function PageHero({ isMobile }) {
   return (
-    <section style={{ background: 'var(--navy)', padding: isMobile ? '3rem 0.75rem' : '4.5rem 0', borderBottom: '3px solid var(--teal)', position: 'relative', overflow: 'hidden' }}>
-      {/* subtle grid bg */}
+    <section style={{ position: 'relative', borderBottom: '3px solid var(--teal)', overflow: 'hidden' }}>
+      {/* background image */}
+      <img
+        src={heroBanner}
+        alt=""
+        aria-hidden="true"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 40%' }}
+      />
+      {/* navy overlay */}
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.88)' }} />
+      {/* subtle grid on top */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(14,164,114,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(14,164,114,0.04) 1px,transparent 1px)', backgroundSize: '48px 48px', pointerEvents: 'none' }} />
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0' : '0 4rem', position: 'relative', zIndex: 1 }}>
+
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '3rem 0.75rem' : '4.5rem 4rem' }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
             <Link to="/" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontFamily: 'var(--font-body)' }}>Home</Link>
@@ -205,26 +246,40 @@ function WhoWeHelp({ isMobile }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                style={{ background: 'var(--white)', padding: isMobile ? '1.5rem' : '2.5rem', borderTop: '3px solid var(--teal)' }}
+                style={{ background: 'var(--white)', overflow: 'hidden', borderTop: '3px solid var(--teal)', display: 'flex', flexDirection: 'column' }}
               >
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.25rem' }}>
-                  <div style={{ width: '48px', height: '48px', background: 'var(--teal-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Icon size={22} color="var(--teal)" />
-                  </div>
-                  <div>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '3px' }}>{client.title}</h3>
-                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'var(--teal)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{client.subtitle}</p>
-                  </div>
+                {/* card image */}
+                <div style={{ height: '200px', overflow: 'hidden', position: 'relative' }}>
+                  <img
+                    src={client.img}
+                    alt={client.title}
+                    loading="lazy"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%', display: 'block' }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 40%, rgba(13,27,75,0.55) 100%)' }} />
                 </div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '1.25rem' }}>{client.desc}</p>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {client.points.map((pt) => (
-                    <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.5rem' }}>
-                      <CheckCircle2 size={14} color="var(--teal)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', color: 'var(--text-dark)' }}>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
+
+                {/* card body */}
+                <div style={{ padding: isMobile ? '1.5rem' : '2rem', flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.25rem' }}>
+                    <div style={{ width: '44px', height: '44px', background: 'var(--teal-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Icon size={20} color="var(--teal)" />
+                    </div>
+                    <div>
+                      <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--navy)', marginBottom: '3px' }}>{client.title}</h3>
+                      <p style={{ fontFamily: 'var(--font-body)', fontSize: '11px', color: 'var(--teal)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{client.subtitle}</p>
+                    </div>
+                  </div>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '1.25rem' }}>{client.desc}</p>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {client.points.map((pt) => (
+                      <li key={pt} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.5rem' }}>
+                        <CheckCircle2 size={14} color="var(--teal)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', color: 'var(--text-dark)' }}>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             )
           })}
@@ -262,28 +317,40 @@ function Solutions({ isMobile }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                style={{ background: 'var(--white)', padding: isMobile ? '1.5rem' : '2rem', display: 'flex', flexDirection: 'column', borderTop: '3px solid var(--teal)' }}
+                style={{ background: 'var(--white)', display: 'flex', flexDirection: 'column', overflow: 'hidden', borderTop: '3px solid var(--teal)' }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-                  <div style={{ width: '40px', height: '40px', background: 'var(--teal-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Icon size={20} color="var(--teal)" />
-                  </div>
-                  <div>
-                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 800, color: 'var(--navy)', margin: 0 }}>{sol.title}</h3>
-                    {sol.tag && (
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 700, color: 'var(--white)', background: 'var(--teal)', padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{sol.tag}</span>
-                    )}
-                  </div>
+                {/* card image */}
+                <div style={{ height: '160px', overflow: 'hidden', position: 'relative' }}>
+                  <img
+                    src={sol.img}
+                    alt={sol.title}
+                    loading="lazy"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 30%, rgba(13,27,75,0.5) 100%)' }} />
+                  {sol.tag && (
+                    <span style={{ position: 'absolute', top: '12px', right: '12px', fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 700, color: 'var(--white)', background: 'var(--teal)', padding: '3px 10px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{sol.tag}</span>
+                  )}
                 </div>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '1.25rem', flex: 1 }}>{sol.desc}</p>
-                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--teal)', marginBottom: '0.75rem' }}>Our Process</p>
-                  {sol.process.map((step, si) => (
-                    <div key={step} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.45rem' }}>
-                      <span style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: 'var(--teal)', minWidth: '18px', marginTop: '1px' }}>{si + 1}.</span>
-                      <span style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'var(--text-dark)', lineHeight: 1.5 }}>{step}</span>
+
+                {/* card body */}
+                <div style={{ padding: isMobile ? '1.5rem' : '1.75rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.875rem' }}>
+                    <div style={{ width: '36px', height: '36px', background: 'var(--teal-pale)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <Icon size={18} color="var(--teal)" />
                     </div>
-                  ))}
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 800, color: 'var(--navy)', margin: 0 }}>{sol.title}</h3>
+                  </div>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: '13.5px', color: 'var(--text-muted)', lineHeight: 1.75, marginBottom: '1.25rem', flex: 1 }}>{sol.desc}</p>
+                  <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+                    <p style={{ fontFamily: 'var(--font-body)', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--teal)', marginBottom: '0.75rem' }}>Our Process</p>
+                    {sol.process.map((step, si) => (
+                      <div key={step} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', marginBottom: '0.45rem' }}>
+                        <span style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 800, color: 'var(--teal)', minWidth: '18px', marginTop: '1px' }}>{si + 1}.</span>
+                        <span style={{ fontFamily: 'var(--font-body)', fontSize: '12.5px', color: 'var(--text-dark)', lineHeight: 1.5 }}>{step}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             )
@@ -320,13 +387,27 @@ function InsuranceServices({ isMobile }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              style={{ background: 'var(--white)', padding: isMobile ? '1.5rem' : '2.5rem' }}
+              style={{ background: 'var(--white)', overflow: 'hidden' }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '2px solid var(--teal)' }}>
-                <div style={{ width: '8px', height: '32px', background: cat.color, flexShrink: 0 }} />
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', fontWeight: 800, color: 'var(--navy)', margin: 0 }}>{cat.title}</h3>
+              {/* category banner image */}
+              <div style={{ height: '150px', overflow: 'hidden', position: 'relative' }}>
+                <img
+                  src={cat.img}
+                  alt={cat.title}
+                  loading="lazy"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.62)' }} />
+                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: '1rem 1.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{ width: '5px', height: '28px', background: 'var(--teal)', flexShrink: 0 }} />
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', fontWeight: 800, color: 'var(--white)', margin: 0 }}>{cat.title}</h3>
+                  </div>
+                </div>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+              {/* items */}
+              <div style={{ padding: isMobile ? '1.25rem' : '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {cat.items.map((item) => (
                   <div key={item.name} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                     <div style={{ width: '6px', height: '6px', background: 'var(--teal)', flexShrink: 0, marginTop: '7px' }} />
@@ -350,7 +431,6 @@ function ClaimsSupport({ isMobile }) {
     <section id="claims-support" style={{ background: 'var(--light-bg)', padding: isMobile ? '3rem 0' : '5rem 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 0.75rem' : '0 4rem' }}>
 
-        {/* Header */}
         <div style={{ textAlign: isMobile ? 'left' : 'center', marginBottom: isMobile ? '2rem' : '3.5rem' }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.5rem' }}>
             Claims Support
@@ -365,7 +445,6 @@ function ClaimsSupport({ isMobile }) {
           )}
         </div>
 
-        {/* Two-column: process steps + image/stats */}
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '1px', background: 'var(--border)', marginBottom: '1px' }}>
 
           {/* Left: steps */}
@@ -398,7 +477,7 @@ function ClaimsSupport({ isMobile }) {
 
           {/* Right: image + stats */}
           <div style={{ position: 'relative', overflow: 'hidden', minHeight: isMobile ? '260px' : 'auto' }}>
-            <img src={claimsImg} alt="Claims advisory" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
+            <img src={imgClaims} alt="Claims advisory" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,31,79,0.78)' }} />
             <div style={{ position: 'relative', zIndex: 1, padding: isMobile ? '2rem 1.5rem' : '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: 'rgba(255,255,255,0.1)' }}>
@@ -437,8 +516,16 @@ function ClaimsSupport({ isMobile }) {
 
 function ServicesCTA({ isMobile }) {
   return (
-    <section style={{ background: 'var(--navy)', padding: isMobile ? '3rem 0' : '5rem 0', borderTop: '3px solid var(--teal)' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '0 0.75rem' : '0 4rem', textAlign: isMobile ? 'left' : 'center' }}>
+    <section style={{ position: 'relative', borderTop: '3px solid var(--teal)', overflow: 'hidden' }}>
+      <img
+        src={imgTrust}
+        alt=""
+        aria-hidden="true"
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+      />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(13,27,75,0.92)' }} />
+
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '1280px', margin: '0 auto', padding: isMobile ? '3rem 0.75rem' : '5rem 4rem', textAlign: isMobile ? 'left' : 'center' }}>
         <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p style={{ fontSize: '11px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--teal)', fontWeight: 700, fontFamily: 'var(--font-body)', marginBottom: '0.75rem' }}>Start Today</p>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: isMobile ? '1.5rem' : 'clamp(1.8rem, 3vw, 2.5rem)', fontWeight: 800, color: 'var(--white)', letterSpacing: '-0.02em', marginBottom: '1.25rem' }}>
